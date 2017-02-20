@@ -17,7 +17,7 @@ class LoginController extends AbstractController{
   public function __construct($view){
     parent::__construct($view);
     $this->sentinel = new Sentinel();
-    $this->sentinel = this->sentinel->getSentinel();
+    $this->sentinel = $this->sentinel->getSentinel();
   }
 
 
@@ -29,7 +29,7 @@ class LoginController extends AbstractController{
         'password' => filter_var($_POST['password'], FILTER_SANITIZE_STRING)
       ];
 
-      $UserInterface = this->sentinel->authenticate($credentials);
+      $userInterface = $this->sentinel->authenticate($credentials);
 
       if($userInterface instanceof userInterface){
         $this->sentinel->login($userInterface, true);

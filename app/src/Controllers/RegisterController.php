@@ -23,8 +23,13 @@ final class RegisterController extends AbstractController{
     $this->sentinel = $this->sentinel->getSentinel();
   }
 
-  public fuction register(){
-    if(isset($_POST['username']) && isset($_POST['password'] && isset($_POST['nom'] && isset($_POST['prenom']) && isset($_POST['email']))){
+  public function dispatch(Request $request, Response $response, $args){
+        $this->view['view']->render($response, 'register.html.twig');
+        return $response;
+  }
+
+  public function register(){
+    if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email'])){
       $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
       $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
       $pass_confirm = filter_var($_POST['password_confirm'], FILTER_SANITIZE_STRING);
@@ -45,21 +50,17 @@ final class RegisterController extends AbstractController{
             $this->sentinel->registerAndActivate($credentials);
 
             return 3;
-          }else{
-            return 1;
           }
         }else{
           return 6;
+          }
         }else{
-          return 5;
-        }else{
-          return 4,
+          return 4;
+          }
         }else{
           return 2;
         }
       }
-    }
-  }
 
   public function dispatchSubmit(Request $request, Response $response, $args){
       $res = $this->register();

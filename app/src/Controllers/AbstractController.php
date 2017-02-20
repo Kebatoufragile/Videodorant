@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers,
+namespace App\Controllers;
 
 abstract class AbstractController{
   protected $view;
