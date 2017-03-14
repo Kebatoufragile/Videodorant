@@ -24,10 +24,11 @@
 {% block navbar %}
     <nav>
         <div class="nav-wrapper blue darken-4">
-            <a href="#" class="brand-logo" style="margin-left:30px">Vidéodorant</a>
-            <form class="right" style="width:80%">
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large" style="margin-right:100px"><i class="material-icons">menu</i></a>
+            <a href="#" class="brand-logo center">Vidéodorant</a>
+            <form class="right" style="width:30%">
                 <div class="input-field">
-                    <input id="search" type="search" required>
+                    <input id="search" type="search" placeholder="Rechercher..." autocomplete="off" required>
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     <i class="material-icons">close</i>
                 </div>
@@ -37,26 +38,43 @@
     </nav>
 
     <ul id="slide-out" class="side-nav">
-        <li><div class="userView">
-                <div class="background">
-                    <img src="img/backgrounddefault.jpg">
-                </div>
-                <a href="#"><img class="circle" src="img/profiledefault.png"></a>
-                <a href="#"><span class="white-text name">Sébastien Dupuis</span></a>
-                <a href="#"><span class="white-text email">sebastien.dupuis@gmail.com</span></a>
-            </div></li>
-        <li><a href="#" class="waves-effect"><i class="material-icons">home</i>Accueil</a></li>
-        <li><a href="#"><i class="material-icons">account_circle</i>Compte</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="waves-effect" href="#"><i class="material-icons">search</i>Recherche</a></li>
+        {% if user %}
+            {# if logged #}
+            <li><div class="userView">
+                    <div class="background">
+                        <img src="img/backgrounddefault.jpg">
+                    </div>
+                    <a href="#"><img class="circle" src="img/{{ user.img }}"></a>
+                    <a href="#"><span class="white-text name">{{ user.name }}</span></a>
+                    <a href="#"><span class="white-text email">{{ user.email }}</span></a>
+                </div></li>
+            <li><a href="#" class="waves-effect"><i class="material-icons">home</i>Accueil</a></li>
+            <li><a href="#"><i class="material-icons">account_circle</i>Compte</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="waves-effect" href="#"><i class="material-icons">search</i>Recherche</a></li>
+        {% else %}
+            {# if not logged #}
+            <li><div class="userView">
+                    <div class="background">
+                        <img src="img/backgrounddefault.jpg">
+                    </div>
+                    <a href="#"><img class="circle" src="img/profiledefault.png"></a>
+                    <a href="#"><span class="white-text name">Veuillez vous inscrire ou vous connecter.</span></a>
+                </div></li>
+            <li><a href="#" class="waves-effect"><i class="material-icons">home</i>Accueil</a></li>
+            <li><a href="#"><i class="material-icons">account_circle</i>Se connecter/S'inscrire</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="waves-effect" href="#"><i class="material-icons">search</i>Recherche</a></li>
+        {% endif %}
     </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
-    <script>$('.button-collapse').sideNav({
-                    menuWidth: 300,
-                    edge: 'left',
-                    closeOnClick: true,
-                    draggable: true
+    <script>$(document).ready(function() {
+            $('.button-collapse').sideNav({
+                menuWidth: 300,
+                edge: 'left',
+                closeOnClick: true,
+                draggable: true
+            })
         });
     </script>
 
