@@ -10,4 +10,4 @@ $app->get('/users', 'App\Controllers\UserController:dispatch')->setName('userpag
 
 $app->post('/login', 'App\Controllers\LoginController:login')->setName('login');
 
-$app->get('/register', 'App\Controllers\RegisterController:dispatch')->setName('register');
+$app->get('/signin', 'App\Controllers\RegisterController:dispatch')->setName('signin');
