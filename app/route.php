@@ -15,3 +15,5 @@ $app->get('/signin', 'App\Controllers\RegisterController:dispatch')->setName('si
 $app->post('/register', 'App\Controllers\RegisterController:register')->setName('register');
 
 $app->get('/logout', 'App\Controllers\LogoutController:logout')->setName('logout');
+
+$app->get('/profil', 'App\Controllers\ProfilController:displayProfile')->setName('profil');

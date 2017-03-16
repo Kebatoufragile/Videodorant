@@ -2,12 +2,15 @@
 
 namespace App\Controllers;
 
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 class ProfilController extends AbstractController{
 
   protected $view;
   protected $logger;
 
-  public function __construct($view)
+  public function __construct($view){
     parent::__construct($view);
   }
 
@@ -22,3 +25,4 @@ class ProfilController extends AbstractController{
       ));
     }
   }
+}
