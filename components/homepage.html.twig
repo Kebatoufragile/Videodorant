@@ -3,6 +3,18 @@
 
 {% block content %}
 
+{% if error != false %}
+<div class="card-panel red darken-4">
+  {{error}}
+</div>
+{% endif %}
+
+{% if success != false %}
+    <div class="card-panel green accent-3">
+      {{success}}
+    </div>
+{% endif %}
+
 <div class="container">
     <form class="col s12" action="login" method="post">
       <div class="row">

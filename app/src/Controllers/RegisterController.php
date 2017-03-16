@@ -48,6 +48,10 @@ final class RegisterController extends AbstractController{
 
             $this->sentinel->registerAndActivate($credentials);
 
+            $user = User::where('email', 'like', $email)->first();
+            $user->username = $identifiant;
+            $user->save();
+
             $this->view['view']->render($response, 'homepage.html.twig', array(
                 'success' => "You have been successfully registered. You can now try log in."
             ));
