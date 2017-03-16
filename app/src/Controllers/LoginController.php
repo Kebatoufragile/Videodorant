@@ -39,7 +39,7 @@ class LoginController extends AbstractController{
         $_SESSION['userId'] = $userInterface->getUserId();
         $_SESSION['user'] = $user;
 
-        return $this->view['view']->render($response, 'homepage.html.twig', array(
+        return $this->view['view']->render($response, 'profil.html.twig', array(
           'success' => 'Connexion reussie',
           'user' => $_SESSION['user']
         ));
