@@ -22,7 +22,7 @@ $container['view'] = function ($c) {
         $c['request']->getUri()
     ));
     $view->addExtension(new Twig_Extension_Debug());
-	
+
     return $view;
 };
 
@@ -78,7 +78,7 @@ $container['activation'] = function ($c) {
 
 $container['App\Controllers\HomeController'] = function ($c) {
     return new App\Controllers\HomeController(
-		$c->get('view'), 
+		$c->get('view'),
 		$c->get('logger'),
 		$c->get('App\Repositories\HomeRepository')
     );
@@ -86,7 +86,7 @@ $container['App\Controllers\HomeController'] = function ($c) {
 
 $container['App\Controllers\UserController'] = function ($c) {
     return new App\Controllers\UserController(
-		$c->get('view'), 
+		$c->get('view'),
 		$c->get('logger'),
 		$c->get('App\Repositories\UserRepository')
     );

@@ -28,37 +28,44 @@ final class RegisterController extends AbstractController{
         return $response;
   }
 
-  public function register(){
-    if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email'])){
-      $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+  public function register(Request $request, Response $response){
+    if(isset($_POST['identifiant']) && isset($_POST['password']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email'])){
       $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-      $pass_confirm = filter_var($_POST['password_confirm'], FILTER_SANITIZE_STRING);
       $nom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
-      $prenom = filter_var($_POST['nom'], FILTER_SANITIZE_STRING);
+      $prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
       $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+      $identifiant = filter_var($_POST['identifiant'], FILTER_SANITIZE_STRING);
 
       if(is_null(User::where('email', 'like', $email)->first())){
-        if(!strcmp($password, $pass_confirm)){
-          if($username && $password && $prenom && $nom && $email){
+          if($identifiant && $password && $prenom && $nom && $email){
             $credentials = [
               'password' => $password,
               'last_name' => $nom,
-              'fullname' => $prenom,
-              'email' => $email
+              'first_name' => $prenom,
+              'email' => $email,
+              'username' => $identifiant
             ];
 
             $this->sentinel->registerAndActivate($credentials);
 
-            return 3;
+            $this->view['view']->render($response, 'homepage.html.twig', array(
+                'success' => "You have been successfully registered. You can now try log in."
+            ));
           }
         }else{
-          return 6;
+          $this->view['view']->render($response, 'register.html.twig', array(
+              'error' => 'Mail address already used.'
+          ));
           }
         }else{
-          return 4;
-          }
-        }else{
-          return 2;
+          $this->view['view']->render($response, 'register.html.twig', array(
+              'error' => 'Unable to register you, informations are missing, please try again.',
+              'pass' => $_POST['password'],
+              'id' => $_POST['identifiant'],
+              'nom' => $_POST['nom'],
+              'prenom' => $_POST['prenom'],
+              'email' => $_POST['email']
+          ));
         }
       }
 

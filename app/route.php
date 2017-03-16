@@ -11,3 +11,5 @@ $app->get('/users', 'App\Controllers\UserController:dispatch')->setName('userpag
 $app->post('/login', 'App\Controllers\LoginController:login')->setName('login');
 
 $app->get('/signin', 'App\Controllers\RegisterController:dispatch')->setName('signin');
+
+$app->post('/register', 'App\Controllers\RegisterController:register')->setName('register');
