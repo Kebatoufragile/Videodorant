@@ -13,3 +13,5 @@ $app->post('/login', 'App\Controllers\LoginController:login')->setName('login');
 $app->get('/signin', 'App\Controllers\RegisterController:dispatch')->setName('signin');
 
 $app->post('/register', 'App\Controllers\RegisterController:register')->setName('register');
+
+$app->get('/logout', 'App\Controllers\LogoutController:logout')->setName('logout');
