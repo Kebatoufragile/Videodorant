@@ -3,68 +3,71 @@
 
 {% block content %}
 
-{% if error != false %}
-<div class="card-panel red darken-4">
-  {{error}}
-</div>
-{% endif %}
+  {% if error != false %}
+    <div class="card-panel red darken-4">
+      {{error}}
+    </div>
+  {% endif %}
 
-{% if success != false %}
+  {% if success != false %}
     <div class="card-panel green accent-3">
       {{success}}
     </div>
-{% endif %}
+  {% endif %}
 
-{% if user != true %}
+  {% if user != true %}
 
-<div class="container">
-    <form class="col s12" action="login" method="post">
-      <div class="row">
-        <div class="input-field col s6">
-          <label for="mail">Email</label>
-          <input id="mail" class="validate" type="email" name="email" placeholder="exemple: abc@xyz.com" required />
-        </div>
-        <div class="input-field col s6">
-          <label for="pass">Mot de passe</label>
-          <input class="validate" id="pass" type="password" name="password" placeholder="choose a password" required />
-        </div>
-      </div>
-
+    <div class="container homeform">
+      <form class="col s12" action="login" method="post">
         <div class="row">
-            <div class="center-align">
-              <button class="btn waves-effect waves-light" type="submit" name="login">Connexion
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
+          <div class="input-field col s6">
+            <input id="mail" class="validate" type="email" name="email" required />
+            <label for="mail">Email</label>
+          </div>
+          <div class="input-field col s6">
+            <input class="validate" id="pass" type="password" name="password" required />
+            <label for="pass">Mot de passe</label>
+          </div>
         </div>
-        </form>
-
-        <br/>
 
         <div class="row">
           <div class="center-align">
-            <button href="register" class="btn waves-effect waves-light" name="register">Inscription</button>
+            <button class="btn waves-effect waves-light brown darken-1" type="submit" name="login">Connexion
+              <i class="material-icons right">send</i>
+            </button>
           </div>
         </div>
-</div>
+      </form><br><br>
 
-{% else %}
+      <div class="divider"></div><br><br><br>
 
-  <div class="align-center card large">
-    <div class="card-image">
-      <img src="img/backgrounddefault.jpg"></img>
-    </div>
-    <div class="card-content">
-      Bienvenue sur Videodorant {{user.username}}. Sur ce site, tu peux diffuser en direct des vidéos, les poster et les partager avec tes amis.
-    </div>
-    <div class="card-action">
-      <a href="profil">Accèder à ton profil</a>
-      <a href="#">Parcourir les chaînes</a>
-      <a href="#">Commencer une diffusion</a>
-    </div>
-  </div>
 
-{% endif %}
+      <div class="row">
+        <div class="center-align">
+          <a href="signin" class="btn waves-effect waves-light brown darken-1">Inscription</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="center-align">
+          <a href="catalog" class="btn waves-effect waves-light brown darken-1">Continuer la navigation en tant qu'invité</a>
+        </div>
+      </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="align-center card large">
+      <div class="card-image">
+        <img src="img/backgrounddefault.jpg"/>
+      </div>
+      <div class="card-content">
+        Bienvenue sur Videodorant {{user.username}}. Sur ce site, tu peux diffuser en direct des vidéos, les poster et les partager avec tes amis.
+      </div>
+    </div>
+
+  {% endif %}
 
 
 {% endblock %}
