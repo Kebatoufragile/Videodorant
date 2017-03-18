@@ -1,3 +1,7 @@
 body{
     background: url("../img/background.jpg") fixed no-repeat center center;
 }
+
+.homeform{
+    margin-top:8%;
+}
