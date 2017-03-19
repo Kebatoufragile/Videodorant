@@ -5,3 +5,11 @@ body{
 .homeform{
     margin-top:8%;
 }
+
+#videos{
+    margin-top:5%
+}
+
+.video{
+    opacity:0
+}

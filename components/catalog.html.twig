@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <script>
+        $(document).ready(function() {
+            Materialize.showStaggeredList('#videos');
+        });
+    </script>
+
+    <ul id="videos">
+
+        {% set nbRows = (catalog|length/3)|round %}
+        {% set i = 1 %}
+
+        {% for j in 0..nbRows %}
+
+            <li class="video">
+                <div class="row">
+
+                    {% for video in catalog[i-1:3] %}
+
+                        <div class="col s12 m12 l4">
+                            <div class="card transparent">
+                                <div class="card-image">
+                                    <img src="img/{{ video.img }}">
+                                    <span class="card-title">{{ video.title }}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p>{{ video.desc }}</p>
+                                </div>
+                                <div class="card-action grey">
+                                    <a class="black-text" href="video?id={{ video.id }}">See the video</a>
+                                    <a class="white-text right" href="user?id="{{ video.idUser }}>@{{ video.user }}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                    {% set i = i+3 %}
+                </div>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
