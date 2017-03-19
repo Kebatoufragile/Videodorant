@@ -42,7 +42,8 @@ final class CatalogController extends AbstractController{
 
     private function getVideosWhenNotLogged(){
         // TODO videos populaires
-        return array();
+        $videos = [1,2,3,4,5,6,7,8,9,10];
+        return $videos;
     }
 
 }
