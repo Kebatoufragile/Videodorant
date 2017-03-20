@@ -41,7 +41,6 @@ final class RegisterController extends AbstractController{
       $prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_STRING);
       $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
       $identifiant = filter_var($_POST['identifiant'], FILTER_SANITIZE_STRING);
-
       if(is_null(User::where('email', 'like', $email)->first())){
           if($identifiant && $password && $prenom && $nom && $email){
             $credentials = [
@@ -61,7 +60,7 @@ final class RegisterController extends AbstractController{
             /***************** Ajout de la photo de profil *****************/
 
 
-                  //Tableaux de données
+            //Tableaux de données
             $tabExt = array('jpg','png','jpeg', 'gif'); //Extensions autorisées
             $infosImg = array();
 
@@ -73,11 +72,11 @@ final class RegisterController extends AbstractController{
             /*************************************************************************
              * Creation du repertoire cible si inexistant
              ***********************************************************************/
-            if(!is_dir(TARGET)){
-                if(!mkdir(TARGET, 777)) {
-                    exit('Erreur : le repertoire cible ne peut-être créé ! Vérifiez que vous disposez des droits suffisants pour le faire ou créez le manuellement !');
-                }
-            }
+            // if(!is_dir(TARGET)){
+            //     if(!mkdir(TARGET, 777)) {
+            //         exit('Erreur : le repertoire cible ne peut-être créé ! Vérifiez que vous disposez des droits suffisants pour le faire ou créez le manuellement !');
+            //     }
+            // }
 
             /*************************************************************************
              * Script d'upload
@@ -133,8 +132,9 @@ final class RegisterController extends AbstractController{
                     //Sinon on affiche une erreur pour le champ vide
                     $message = 'Please fill the form.';
                 }
+                var_dump($message);
             }
-        }
+
 
 
 
