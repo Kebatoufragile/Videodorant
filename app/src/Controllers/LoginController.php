@@ -39,7 +39,7 @@ class LoginController extends AbstractController{
         $_SESSION['userId'] = $userInterface->getUserId();
         $_SESSION['user'] = $user;
 
-        return $this->view['view']->render($response, 'profil.html.twig', array(
+        return $this->view['view']->render($response, 'profile.html.twig', array(
           'success' => 'Connexion reussie',
           'user' => $_SESSION['user']
         ));
@@ -49,7 +49,7 @@ class LoginController extends AbstractController{
         ));
       }
     }else{
-      return $this->view['view']->render($reponse, 'homepage.html.twig', array(
+      return $this->view['view']->render($response, 'homepage.html.twig', array(
         'error' => 'Erreur, remplissez les champs obligatoires'
       ));
     }
