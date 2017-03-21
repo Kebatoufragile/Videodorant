@@ -66,22 +66,14 @@ final class RegisterController extends AbstractController{
 
             //Variables
             $extension = '';
-            $message = '';
+            $message = 'L\'image a été ajoutée avec succès';
             $nomImage = '';
-
-            /*************************************************************************
-             * Creation du repertoire cible si inexistant
-             ***********************************************************************/
-            // if(!is_dir(TARGET)){
-            //     if(!mkdir(TARGET, 777)) {
-            //         exit('Erreur : le repertoire cible ne peut-être créé ! Vérifiez que vous disposez des droits suffisants pour le faire ou créez le manuellement !');
-            //     }
-            // }
 
             /*************************************************************************
              * Script d'upload
              ************************************************************************/
-            if(!empty($_POST)){
+
+            if(!empty($_FILES)){
                 //On vérifie si le champ de l'extension est rempli
                 if( !empty($_FILES['picture']['name'])){
                     //Récupération de l'extension du fichier
@@ -111,91 +103,85 @@ final class RegisterController extends AbstractController{
 
                                     }else{
                                         //Sinon on affiche une erreur système
-                                        $message = 'A problem has occured during the upload.';
+                                        $message = 'Problème d\'upload.';
                                     }
                                 }else{
-                                    $message = 'An internal error prevented the upload.';
+                                    $message = 'Erreur interne.';
                                 }
                             }else{
                                 //Sinon erreur sur les dimensions et taille de l'image
-                                $message = 'The picture is too big. (Max : 900x1200)';
+                                $message = 'L\'image est trop grande. (Max : 900x1200)';
                             }
                         }else{
                             //Sinon erreur sur le type de l'image
-                            $message = 'The file you want to upload is not a picture.';
+                            $message = 'Le fichier n\'est pas une image .';
                         }
                     }else{
                         //Sinon on affiche une erreur sur l'extension
-                        $message = 'The file extension is uncorrect.';
+                        $message = 'L\'extension du fichier n\'est pas correct.';
                     }
                 }else{
                     //Sinon on affiche une erreur pour le champ vide
-                    $message = 'Please fill the form.';
+                    $message = 'Remplissez le champ.';
                 }
-                var_dump($message);
-            }
-
-
-
-
-            /***************************************************************/
+            }else{
+              $message = "Aucun fichier n'\a été envoyé";
+          }
 
             $this->view['view']->render($response, 'homepage.html.twig', array(
-                'success' => "You have been successfully registered. You can now try log in."
+                'success' => "Vous avez été inscrit avec succès. Vous pouvez à présent vous connecter.",
+                'successImgUpload' => $message
             ));
           }
         }else{
           $this->view['view']->render($response, 'register.html.twig', array(
-              'error' => 'Mail address already used.'
+              'error' => 'Adresse email déjà utilisée .',
+              "errorImgUpload" => $message
           ));
           }
         }else{
           $this->view['view']->render($response, 'register.html.twig', array(
-              'error' => 'Unable to register you, informations are missing, please try again.',
-              'pass' => $_POST['password'],
-              'id' => $_POST['identifiant'],
-              'nom' => $_POST['nom'],
-              'prenom' => $_POST['prenom'],
-              'email' => $_POST['email']
+              'error' => 'Impossible de vous inscrire, il manque des informations.',
+              "errorImgUpload" => $message
           ));
         }
       }
 
-  public function dispatchSubmit(Request $request, Response $response, $args){
-      $res = $this->register();
-      switch($res) {
-          case 2:
-              $this->view['view']->render($response, 'register.html.twig', array(
-                  'error' => 'Unable to register you, informations are missing, please try again.'
-              ));
-              break;
-          case 3:
-              $this->view['view']->render($response, 'homepage.html.twig', array(
-                  'success' => "You have been successfully registered. You can now try log in."
-              ));
-              break;
-          case 4:
-              $this->view['view']->render($response, 'register.html.twig', array(
-                  'error' => 'Mail address already used.'
-              ));
-              break;
-          case 5:
-              $this->view['view']->render($response, 'register.html.twig', array(
-                  'error' => 'Username already used.'
-              ));
-              break;
-          case 6:
-              $this->view['view']->render($response, 'register.html.twig', array(
-                  'error' => 'Passwords are differents.'
-              ));
-              break;
-          default:
-              $this->view['view']->render($response, 'register.html.twig', array(
-                  'error' => 'Unable to register you, informations are wrong, please try again.'
-              ));
-              break;
-      }
-      return $response;
-  }
+  // public function dispatchSubmit(Request $request, Response $response, $args){
+  //     $res = $this->register();
+  //     switch($res) {
+  //         case 2:
+  //             $this->view['view']->render($response, 'register.html.twig', array(
+  //                 'error' => 'Unable to register you, informations are missing, please try again.'
+  //             ));
+  //             break;
+  //         case 3:
+  //             $this->view['view']->render($response, 'homepage.html.twig', array(
+  //                 'success' => "You have been successfully registered. You can now try log in."
+  //             ));
+  //             break;
+  //         case 4:
+  //             $this->view['view']->render($response, 'register.html.twig', array(
+  //                 'error' => 'Mail address already used.'
+  //             ));
+  //             break;
+  //         case 5:
+  //             $this->view['view']->render($response, 'register.html.twig', array(
+  //                 'error' => 'Username already used.'
+  //             ));
+  //             break;
+  //         case 6:
+  //             $this->view['view']->render($response, 'register.html.twig', array(
+  //                 'error' => 'Passwords are differents.'
+  //             ));
+  //             break;
+  //         default:
+  //             $this->view['view']->render($response, 'register.html.twig', array(
+  //                 'error' => 'Unable to register you, informations are wrong, please try again.'
+  //             ));
+  //             break;
+  //     }
+  //     return $response;
+  // }
 
 }

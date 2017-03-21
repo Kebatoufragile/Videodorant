@@ -10,7 +10,7 @@
 {% endif %}
 
   <div class="row">
-    <form action="register" method="post" class="col s12">
+    <form action="register" method="post" enctype="multipart/form-data" class="col s12">
       <div class="row">
         <div class="input-field col s2">
           <input placeholder="Placeholder" id="nom" type="text" class="validate" name="nom">
@@ -35,7 +35,7 @@
             <label for="password">Mot de Passe</label>
           </div>
           <div class="input-field col s2">
-              <span>Choisissez votre photo de profil (Max 900x1200)<span>
+              <span class="white-text" >Choisissez votre photo de profil (Max 900x1200)<span>
               <input type="file" id="picture" name="picture" placeholder="Parcourir" required>
           </div>
       </div>
