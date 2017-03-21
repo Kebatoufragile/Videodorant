@@ -28,17 +28,17 @@
             <form action="account" method="post" class="col s12">
 
                 <div class="input-field">
-                    <input type="text" id="prenom" value="{{ user.first_name }}" autofocus autocomplete="off" required/>
+                    <input name="prenom" type="text" id="prenom" value="{{ user.first_name }}" autofocus autocomplete="off" required/>
                     <label for="prenom">Prénom</label>
                 </div>
 
                 <div class="input-field">
-                    <input type="text" id="nom" value="{{ user.last_name }}" autofocus autocomplete="off" required/>
+                    <input name="nom" type="text" id="nom" value="{{ user.last_name }}" autofocus autocomplete="off" required/>
                     <label for="nom">Nom</label>
                 </div>
 
                 <div class="input-field">
-                    <input type="email" id="email" value="{{ user.email }}" autofocus autocomplete="off" required/>
+                    <input name="email" type="email" id="email" value="{{ user.email }}" autofocus autocomplete="off" required/>
                     <label for="nom">Adresse e-mail</label>
                 </div>
 
