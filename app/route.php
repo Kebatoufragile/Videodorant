@@ -16,6 +16,10 @@ $app->post('/register', 'App\Controllers\RegisterController:register')->setName(
 
 $app->get('/logout', 'App\Controllers\LogoutController:logout')->setName('logout');
 
-$app->get('/profil', 'App\Controllers\ProfilController:displayProfile')->setName('profil');
+$app->get('/account', 'App\Controllers\ProfileController:displayProfile')->setName('profile');
+
+$app->post('/account', 'App\Controllers\ProfileController:modifyProfile')->setName('profile');
+
+$app->post('/modifypassword', 'App\Controllers\ProfileController:modifyPassword')->setName('profile');
 
 $app->get('/catalog', 'App\Controllers\CatalogController:displayCatalog')->setName('catalog');

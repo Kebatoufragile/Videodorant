@@ -114,13 +114,3 @@ $container['App\Repositories\UserRepository'] = function ($c) {
         $c->get('Model\User')
 	);
 };
-
-# -----------------------------------------------------------------------------
-# Factories Services
-# -----------------------------------------------------------------------------
-
-$container['Mailer'] = function ($c) {
-    return new App\Service\Mailer(
-        $c->get('view')
-    );
-};
