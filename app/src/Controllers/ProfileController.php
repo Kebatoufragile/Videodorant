@@ -38,7 +38,7 @@ class ProfileController extends AbstractController{
 
         }else{
             $this->view['view']->render($response, 'homepage.html.twig', array(
-                "error" => 'Vous n\'êtes pas connecté'
+                'error' => 'Vous n\'êtes pas connecté.'
             ));
         }
     }
@@ -54,7 +54,7 @@ class ProfileController extends AbstractController{
 
         }else{
             $this->view['view']->render($response, 'homepage.html.twig', array(
-                "error" => 'Vous n\'êtes pas connecté'
+                'error' => 'Vous n\'êtes pas connecté.'
             ));
         }
     }
