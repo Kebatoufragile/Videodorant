@@ -23,3 +23,5 @@ $app->post('/account', 'App\Controllers\ProfileController:modifyProfile')->setNa
 $app->post('/modifypassword', 'App\Controllers\ProfileController:modifyPassword')->setName('profile');
 
 $app->get('/catalog', 'App\Controllers\CatalogController:displayCatalog')->setName('catalog');
+
+$app->get('/abonnements', 'App\Controllers\SubscribeController:dispatch')->setName('abonnements');
