@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -36,12 +37,18 @@ final class CatalogController extends AbstractController{
     }
 
     private function getVideosWhenLogged(){
-        // TODO videos récentes des abonnements
-        return array();
+        //$suscriptions = User::getSuscriptions($_SESSION['user']->id);
+
+        $videos = array();
+
+        /**foreach($suscriptions as $k=>$v)
+            array_push($videos, User::getRecentVideos($suscriptions->idUser));*/
+
+        return $videos;
     }
 
     private function getVideosWhenNotLogged(){
-        // TODO videos populaires
+        //return Video::getPopularVideos();
         $videos = [1,2,3,4,5,6,7,8,9,10];
         return $videos;
     }
