@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% if error != false %}
+  <div class="card-panel red darken-4">
+    {{ error }}
+  </div>
+{% endif %}
+
 {% block content %}
 
   <ul id = "videos">
