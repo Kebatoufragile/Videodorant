@@ -2,3 +2,4 @@ vendor/
 storage/
 .idea/
 config/database.php
+public/assets/img/profil/*
