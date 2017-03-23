@@ -37,7 +37,7 @@ class StreamController extends AbstractController{
     public function createStream(Request $request, Response $response, $args){
 
         // TODO
-        
+
     }
 
 }
