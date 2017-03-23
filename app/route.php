@@ -29,3 +29,5 @@ $app->get('/abonnements', 'App\Controllers\SubscribeController:dispatch')->setNa
 $app->get('/streamcreation', 'App\Controllers\StreamController:formStream')->setName('streamcreation');
 
 $app->post('/streamcreation', 'App\Controllers\StreamController:createStream')->setName('streamcreation');
+
+$app->get('/stream', 'App\Controllers\StreamController:showStream')->setName('stream');
