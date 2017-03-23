@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
+
+    {% if success != false %}
+        <div class="card-panel green accent-3">
+            {{success}}
+        </div>
+    {% endif %}
+    {% if error != false %}
+        <div class="card-panel red accent-3">
+            {{ error }}
+        </div>
+    {% endif %}
+
+
+    <div class="row" style="margin-top:2%">
+
+        <div class="col s10 push-l1 card blue-grey darken-2 z-depth-5">
+
+            <h2 class="card-title white-text center-align">Création de stream</h2>
+
+            <form action="streamcreation" method="post" style="margin-bottom:10px">
+
+                <div class="input-field">
+                    <input type="text" id="streamName" name="streamName" required autocomplete="off" autofocus/>
+                    <label for="streamName">Nom du stream</label>
+                </div>
+
+                <div class="input-field">
+                    <select id="categorie" multiple>
+                        <option value="" disabled selected>Choisissez une ou plusieurs catégories</option>
+                        {% for categorie in categories %}
+                            <option value="{{ categorie }}">{{ categorie }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="categorie">Catégorie</label>
+                </div>
+
+                <div class="input-field">
+                    <input type="text" id="tags" name="tags" placeholder="Séparez les tags par des virgules (ex: tag1,tag2...)" autocomplete="off" required/>
+                    <label for="tags">Tags</label>
+                </div>
+
+                <button class="btn waves-effect waves-light blue-grey darken-4 center-align" type="submit">Commencer à diffuser</button>
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}
