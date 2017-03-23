@@ -20,7 +20,7 @@ final class SubscribeController extends AbstractController {
         if(isset($_SESSION['user'])){
           return $this->view['view']->render($response, 'abo.html.twig', array(
             'user' => $_SESSION['user'],
-            'channels' => $this->displaySubscribes()
+            'users' => $this->displaySubscribes()
           ));
         }else{
           return $this->view['view']->render($response, 'abo.html.twig', array(
@@ -34,11 +34,11 @@ final class SubscribeController extends AbstractController {
     public function displaySubscribes(){
 
       /*if(isset($_SESSION['user'])){
-        $abos = Abonnements::where('user_id', 'like', $_SESSION['userId'])->get();*/
+        $abos = Abonnements::where('idAbonne', 'like', $_SESSION['userId'])->get();*/
         $chan = [];
 
-        /*foreach ($abos as $channel)
-          $chan[] = Channels::where('id', 'like', $channel->channel_id)->first();*/
+        /*foreach ($abos as $abo)
+          $chan[] = User::where('id', 'like', $abo->idUser)->first();*/
 
         return $chan;
     }
