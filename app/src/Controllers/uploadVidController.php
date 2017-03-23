@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 
 define('TARGET', "../public/assets/media/");
+define('MIN_TARGET', "../public/assets/img/miniatures/");
 define('MAX_SIZE', 2000000000); //Taille max en octets du fichier
 
 final class uploadVidController extends AbstractController{
@@ -36,6 +37,7 @@ final class uploadVidController extends AbstractController{
 
     public function uploadVideo(Request $request, Response $response){
       $tabExt = array('mp4', 'webm'); //Extensions autorisées
+      $tabExtMin = array('jpg','png','jpeg', 'gif');
 
       //Variables
       $extension = '';
@@ -78,6 +80,19 @@ final class uploadVidController extends AbstractController{
                                   $vid->title = $titre;
                                   $vid->description = $desc;
                                   $vid->userId = $userId;
+
+                                  if(!empty($_FILES['miniature']['name'])){
+                                    $minExt = pathinfo($_FILES['miniature']['name'], PATHINFO_EXTENSION);
+
+                                    if(in_array(strtolower($minExt), $tabExtMin)){
+                                      if(isset($_FILES['miniature']["error"]) && UPLOAD_ERR_OK === $_FILES['miniature']["error"]){
+                                        $nomMin = md5(uniqid()).'.'.$minExt;
+                                        if(move_uploaded_file($_FILES['miniature']['tmp_name'], MIN_TARGET.$nomMin)){
+                                          $vid->minLink = $nomMin;
+                                        }
+                                      }
+                                    }
+                                  }
 
                                   if($vid->save()){
                                     return $this->view['view']->render($response, 'videoUpload.html.twig', array(
