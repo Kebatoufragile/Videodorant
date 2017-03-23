@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 23 Mars 2017 à 16:31
+-- Généré le :  Jeu 23 Mars 2017 à 17:00
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -78,6 +78,19 @@ CREATE TABLE `categorie_stream` (
   `idCategorieStream` int(11) NOT NULL,
   `idStream` int(11) NOT NULL,
   `idCategorie` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaires`
+--
+
+CREATE TABLE `commentaires` (
+  `idCommentaire` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `idVideo` int(11) NOT NULL,
+  `contenu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -197,6 +210,18 @@ CREATE TABLE `users` (
   `profilPicLink` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `videos`
+--
+
+CREATE TABLE `videos` (
+  `idVideo` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `idUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Index pour les tables exportées
 --
@@ -225,6 +250,12 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `categorie_stream`
   ADD PRIMARY KEY (`idCategorieStream`);
+
+--
+-- Index pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  ADD PRIMARY KEY (`idCommentaire`);
 
 --
 -- Index pour la table `persistences`
@@ -281,6 +312,12 @@ ALTER TABLE `users`
   ADD KEY `users_last_name_index` (`last_name`);
 
 --
+-- Index pour la table `videos`
+--
+ALTER TABLE `videos`
+  ADD PRIMARY KEY (`idVideo`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -304,6 +341,11 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `categorie_stream`
   MODIFY `idCategorieStream` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `commentaires`
+--
+ALTER TABLE `commentaires`
+  MODIFY `idCommentaire` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `persistences`
 --
@@ -339,6 +381,11 @@ ALTER TABLE `throttle`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `videos`
+--
+ALTER TABLE `videos`
+  MODIFY `idVideo` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
