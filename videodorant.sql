@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 20 Mars 2017 à 17:43
+-- Généré le :  Jeu 23 Mars 2017 à 16:03
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -23,6 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `abonnements`
+--
+
+CREATE TABLE `abonnements` (
+  `idAbonnement` int(11) NOT NULL,
+  `idAbonne` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `activations`
 --
 
@@ -35,6 +47,29 @@ CREATE TABLE `activations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `idCategorie` int(11) NOT NULL,
+  `name` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie_stream`
+--
+
+CREATE TABLE `categorie_stream` (
+  `idCategorieStream` int(11) NOT NULL,
+  `idStream` int(11) NOT NULL,
+  `idCategorie` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -97,6 +132,30 @@ CREATE TABLE `role_users` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `stream`
+--
+
+CREATE TABLE `stream` (
+  `idStream` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tags`
+--
+
+CREATE TABLE `tags` (
+  `idTag` int(11) NOT NULL,
+  `idStream` int(11) NOT NULL,
+  `tag` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `throttle`
 --
 
@@ -134,11 +193,29 @@ CREATE TABLE `users` (
 --
 
 --
+-- Index pour la table `abonnements`
+--
+ALTER TABLE `abonnements`
+  ADD PRIMARY KEY (`idAbonnement`);
+
+--
 -- Index pour la table `activations`
 --
 ALTER TABLE `activations`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `activations_user_id_unique` (`user_id`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`idCategorie`);
+
+--
+-- Index pour la table `categorie_stream`
+--
+ALTER TABLE `categorie_stream`
+  ADD PRIMARY KEY (`idCategorieStream`);
 
 --
 -- Index pour la table `persistences`
@@ -167,6 +244,18 @@ ALTER TABLE `role_users`
   ADD PRIMARY KEY (`user_id`,`role_id`);
 
 --
+-- Index pour la table `stream`
+--
+ALTER TABLE `stream`
+  ADD PRIMARY KEY (`idStream`);
+
+--
+-- Index pour la table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`idTag`);
+
+--
 -- Index pour la table `throttle`
 --
 ALTER TABLE `throttle`
@@ -187,15 +276,30 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT pour la table `abonnements`
+--
+ALTER TABLE `abonnements`
+  MODIFY `idAbonnement` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `activations`
 --
 ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `categorie_stream`
+--
+ALTER TABLE `categorie_stream`
+  MODIFY `idCategorieStream` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `reminders`
 --
@@ -207,15 +311,25 @@ ALTER TABLE `reminders`
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `stream`
+--
+ALTER TABLE `stream`
+  MODIFY `idStream` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `idTag` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
