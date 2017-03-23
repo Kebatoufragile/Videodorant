@@ -5,8 +5,36 @@
     <div class="row">
 
         <div class="col s10 push-l1 card blue-grey darken-2 z-depth-5 center-align">
+
             <img src="assets/img/profil/{{ user.profilPicLink }}" class="circle" style="max-height:150px"/>
             <h3 class="card-title">Chaîne de <strong>{{ user.username }}</strong></h3>
+
+            <div class="card-content">
+
+                {% for video in videos %}
+
+                    <div class="card">
+
+                        <div class="card-image waves-effect waves-block">
+                            <img class="activator" src="assets/img/miniatures/{{ video.minLink }}"/>
+                        </div>
+
+                        <div class="card-content">
+                            <span class="card-title activator">{{ video.title }}<i class="material-icons right">more_vert</i></span>
+                            <p><a href="video?idVideo={{ video.id }}">Voir la vidéo</a></p>
+                        </div>
+
+                        <div class="card-reveal activator">
+                            <span class="card-title">Gérer la vidéo<i class="material-icons right">close</i></span>
+                            <p>// TODO</p>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
         </div>
 
     </div>

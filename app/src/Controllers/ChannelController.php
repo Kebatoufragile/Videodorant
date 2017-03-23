@@ -32,7 +32,7 @@ final class ChannelController extends AbstractController{
                     return $this->view['view']->render($response, 'channel.html.twig', array(
                         'user' => $_SESSION['user'],
                         'channel' => $user,
-                        'videos' => $videos
+                        'videos' => array(1,2,3,4,5,6)
                     ));
 
                 }else{
