@@ -45,7 +45,6 @@ final class uploadVidController extends AbstractController{
       /*************************************************************************
        * Script d'upload
        ************************************************************************/
-       var_dump($_FILES);
       if(!empty($_FILES)){
           //On vérifie si le champ de l'extension est rempli
           if( !empty($_FILES['video']['name'])){
