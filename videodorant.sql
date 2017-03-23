@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 23 Mars 2017 à 16:03
+-- Généré le :  Jeu 23 Mars 2017 à 16:31
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -56,8 +56,17 @@ CREATE TABLE `activations` (
 
 CREATE TABLE `categorie` (
   `idCategorie` int(11) NOT NULL,
-  `name` int(11) NOT NULL
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `categorie`
+--
+
+INSERT INTO `categorie` (`idCategorie`, `name`) VALUES
+(1, 'Jeux vidéos'),
+(2, 'Promenade'),
+(3, 'Délire');
 
 -- --------------------------------------------------------
 
@@ -150,7 +159,7 @@ CREATE TABLE `stream` (
 CREATE TABLE `tags` (
   `idTag` int(11) NOT NULL,
   `idStream` int(11) NOT NULL,
-  `tag` int(11) NOT NULL
+  `tag` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -289,7 +298,7 @@ ALTER TABLE `activations`
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `categorie_stream`
 --
@@ -299,7 +308,7 @@ ALTER TABLE `categorie_stream`
 -- AUTO_INCREMENT pour la table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `reminders`
 --
@@ -314,12 +323,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `stream`
 --
 ALTER TABLE `stream`
-  MODIFY `idStream` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idStream` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `idTag` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `throttle`
 --

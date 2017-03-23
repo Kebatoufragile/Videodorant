@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Models\Categorie;
+use App\Models\Stream;
+use App\Models\Tags;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 class StreamController extends AbstractController{
 
@@ -19,13 +21,13 @@ class StreamController extends AbstractController{
 
         if(isset($_SESSION['user'])){
 
-            $categories = array();
-            // TODO recuperer catégories
+            $categories = Categorie::all();
 
             return $this->view['view']->render($response, 'streamcreation.html.twig', array(
                 'user' => $_SESSION['user'],
                 'categories' => $categories
             ));
+
         }else{
             return $this->view['view']->render($response, 'homepage.html.twig', array(
                 'error' => 'Vous n\'êtes pas connecté.'
@@ -38,18 +40,31 @@ class StreamController extends AbstractController{
 
         if(isset($_SESSION['user'])){
 
-            /**
             $stream = new Stream();
-            $stream->streamName = $_GET['streamname'];
-            if(isset($_GET['categories']))
-            $stream->categories = $_GET['categories'];
-            if(isset($_GET['tags']
-            $stream->tags = $GET['tags'];
-            // TODO split les tags et ajouter bdd
-             */
-            $idStream = 1;
+            $stream->idUser = $_SESSION['user']->id;
+            $stream->name = filter_var($_POST['streamName'], FILTER_SANITIZE_STRING);
 
-            return $response->withHeader('Location' , 'stream?idStream='.$idStream);
+            if(isset($_POST['categories'])){
+                // TODO foreach
+            }
+
+            $stream->save();
+
+            if(isset($_POST['tags'])){
+                $tags = explode(",", $_POST['tags']);
+
+                foreach($tags as $k => $v){
+                    if(!strcmp($v, "")){
+                        $tag = new Tags();
+                        $tag->idStream = $stream->id;
+                        $tag->tag = $v;
+                        $tag->save();
+                    }
+                }
+
+            }
+
+            return $response->withHeader('Location' , 'stream?idStream='.$stream->id);
 
         }else{
             return $this->view['view']->render($response, 'homepage.html.twig', array(
@@ -65,8 +80,7 @@ class StreamController extends AbstractController{
 
             $idStream = $_GET['idStream'];
 
-            //$stream = Stream::get($args['idStream'])->first();
-            $stream = true;
+            $stream = Stream::where('idStream', 'like', $idStream)->first();
 
             // stream existe
             if(!is_null($stream)){
