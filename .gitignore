@@ -3,3 +3,4 @@ storage/
 .idea/
 config/database.php
 public/assets/img/profil/*
+public/assets/media/*
