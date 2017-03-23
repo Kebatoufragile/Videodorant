@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 
-define('TARGET', "../public/assets/video/");
+define('TARGET', "../public/assets/media/");
 define('MAX_SIZE', 2000000); //Taille max en octets du fichier
 define('WIDTH_MAX', 1200);   //Largeur max de l'image en pixels
 define('HEIGHT_MAX', 900);  //Hauteur max de l'image en pixels
