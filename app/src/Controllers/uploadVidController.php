@@ -76,7 +76,7 @@ final class uploadVidController extends AbstractController{
                                   //test data
 
                                   $titre = filter_var($_POST['titre'], FILTER_SANITIZE_STRING);
-                                  $desc = filter_var($_POST['desc'] FILTER_SANITIZE_STRING);
+                                  $desc = filter_var($_POST['desc'], FILTER_SANITIZE_STRING);
                                   $userId = $_SESSION['user']->id;
 
                                   $vid = new Video();
@@ -107,7 +107,7 @@ final class uploadVidController extends AbstractController{
                           }else{
                             return $this->view['view']->render($response, "videoUpload.html.twig", array(
                               "error" => "Erreur interne - Contactez un administrateur"
-                            ))
+                            ));
                               //$message = 'Erreur interne.';
                           }
                       }else{
@@ -145,3 +145,4 @@ final class uploadVidController extends AbstractController{
         //$message = "Aucun fichier n'\a été envoyé";
     }
   }
+}
