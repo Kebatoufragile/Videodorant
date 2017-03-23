@@ -9,10 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 
 define('TARGET', "../public/assets/media/");
-define('MAX_SIZE', 2000000); //Taille max en octets du fichier
-define('WIDTH_MAX', 1200);   //Largeur max de l'image en pixels
-define('HEIGHT_MAX', 900);  //Hauteur max de l'image en pixels
-
+define('MAX_SIZE', 2000000000); //Taille max en octets du fichier
 
 final class uploadVidController extends AbstractController{
 
@@ -37,9 +34,8 @@ final class uploadVidController extends AbstractController{
         }
     }
 
-    public function uploadVideo(){
-      $tabExt = array('MP4', 'WebM'); //Extensions autorisées
-      $infosVid = array();
+    public function uploadVideo(Request $request, Response $response){
+      $tabExt = array('mp4', 'webm'); //Extensions autorisées
 
       //Variables
       $extension = '';
@@ -49,22 +45,20 @@ final class uploadVidController extends AbstractController{
       /*************************************************************************
        * Script d'upload
        ************************************************************************/
-
+       var_dump($_FILES);
       if(!empty($_FILES)){
           //On vérifie si le champ de l'extension est rempli
           if( !empty($_FILES['video']['name'])){
               //Récupération de l'extension du fichier
               $extension = pathinfo($_FILES['video']['name'], PATHINFO_EXTENSION);
-
               //On vérifie l'extension du fichier
               if(in_array(strtolower($extension), $tabExt)){
-                  //On récupére les dimensions du fichier
-                  $infosVid = getimagesize($_FILES['video']['tmp_name']);
+                  //On récupére le poid de la video
+                  $sizeVid = $_FILES['video']['size'];
 
                   //On vérifie le type de l'image
-                  if($infosVid[2] >= 1 && $infosVid[2] <= 14){
+                  //if($sizeVid >= MAX_SIZE){
                       //On vérifie les dimensions et taille de l'image
-                      if(($infosVid[0]<=WIDTH_MAX) && ($infosVid[1]<=HEIGHT_MAX) && (filesize($_FILES['video']['tmp_name'])<=MAX_SIZE)){
                           //Parcours du tableau d'erreur
                           if(isset($_FILES['video']['error']) && UPLOAD_ERR_OK === $_FILES['video']['error']){
                               //On renomme le fichier
@@ -76,7 +70,7 @@ final class uploadVidController extends AbstractController{
                                   //test data
 
                                   $titre = filter_var($_POST['titre'], FILTER_SANITIZE_STRING);
-                                  $desc = filter_var($_POST['desc'], FILTER_SANITIZE_STRING);
+                                  $desc = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
                                   $userId = $_SESSION['user']->id;
 
                                   $vid = new Video();
@@ -110,20 +104,13 @@ final class uploadVidController extends AbstractController{
                             ));
                               //$message = 'Erreur interne.';
                           }
-                      }else{
-                          //Sinon erreur sur les dimensions et taille de l'image
-                          return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                            "error" => "La video est trop lourde"
-                          ));
-                          //$message = 'L\'image est trop grande. (Max : 900x1200)';
-                      }
-                  }else{
-                      //Sinon erreur sur le type de l'image
-                      return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                        "error" => "Le fichier n\'est pas une video"
-                      ));
-                      //$message = 'Le fichier n\'est pas une image .';
-                  }
+                      // }else{
+                      //     //Sinon erreur sur les dimensions et taille de l'image
+                      //     return $this->view['view']->render($response, "videoUpload.html.twig", array(
+                      //       "error" => "La video est trop lourde"
+                      //     ));
+                      //     //$message = 'L\'image est trop grande. (Max : 900x1200)';
+                      // }
               }else{
                   //Sinon on affiche une erreur sur l'extension
                   return $this->view['view']->render($response, "videoUpload.html.twig", array(
