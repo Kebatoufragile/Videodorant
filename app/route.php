@@ -29,3 +29,10 @@ $app->get('/abonnements', 'App\Controllers\SubscribeController:dispatch')->setNa
 $app->get('/uploadVid', 'App\Controllers\uploadVidController:dispatch')->setName('uploadVid');
 
 $app->post('/uploadVid', 'App\Controllers\uploadVidController:uploadVideo')->setName('uploadVid')
+
+$app->get('/streamcreation', 'App\Controllers\StreamController:formStream')->setName('streamcreation');
+
+$app->post('/streamcreation', 'App\Controllers\StreamController:createStream')->setName('streamcreation');
+
+$app->get('/stream', 'App\Controllers\StreamController:showStream')->setName('stream');
+
