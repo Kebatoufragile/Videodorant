@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model{
-    protected $table = "videos";
+class Commentaire extends Model{
+    protected $table = "commentaires";
     public $timestamps = false;
 }
