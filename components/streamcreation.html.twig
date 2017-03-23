@@ -37,7 +37,7 @@
                     <select id="categorie" multiple>
                         <option value="" disabled selected>Choisissez une ou plusieurs catégories</option>
                         {% for categorie in categories %}
-                            <option value="{{ categorie }}">{{ categorie }}</option>
+                            <option value="{{ categorie.name }}">{{ categorie.name }}</option>
                         {% endfor %}
                     </select>
                     <label for="categorie">Catégorie</label>
