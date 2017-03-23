@@ -25,3 +25,7 @@ $app->post('/modifypassword', 'App\Controllers\ProfileController:modifyPassword'
 $app->get('/catalog', 'App\Controllers\CatalogController:displayCatalog')->setName('catalog');
 
 $app->get('/abonnements', 'App\Controllers\SubscribeController:dispatch')->setName('abonnements');
+
+$app->get('/uploadVid', 'App\Controllers\uploadVidController:dispatch')->setName('uploadVid');
+
+$app->post('/uploadVid', 'App\Controllers\uploadVidController:uploadVideo')->setName('uploadVid')

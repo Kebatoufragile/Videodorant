@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+  {% if error != false %}
+    <div class="card-panel red darken-4">
+      {{error}}
+    </div>
+  {% endif %}
+
+  {% if success != false %}
+    <div class="card-panel green accent-3">
+      {{success}}
+    </div>
+  {% endif %}
+
+  <div class="row">
+    <form action="uploadVid" method="post" enctype="multipart/form-data" class="col s12">
+      <div class="row">
+        <div class="input-field col s2">
+          <input placeholder="Titre" id="titre" name="titre" class="validate">
+          <label for="titre">Titre</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" name="description" class="materialize-textarea">
+            Description de votre video
+          </textarea>
+          <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="row">
+      <div class="input-field col s2">
+          <span class="white-text" >Choisissez votre video<span>
+          <input class="btn waves-effect waves-light" type="file" id="video" name="video" placeholder="Parcourir" required>
+      </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
