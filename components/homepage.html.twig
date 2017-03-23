@@ -3,71 +3,80 @@
 
 {% block content %}
 
-  {% if error != false %}
-    <div class="card-panel red darken-4">
-      {{error}}
-    </div>
-  {% endif %}
-
-  {% if success != false %}
-    <div class="card-panel green accent-3">
-      {{success}}
-    </div>
-  {% endif %}
-
-  {% if user != true %}
-
-    <div class="container homeform">
-      <form class="col s12" action="login" method="post">
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="mail" class="validate" type="email" name="email" required />
-            <label for="mail">Email</label>
-          </div>
-          <div class="input-field col s6">
-            <input class="validate" id="pass" type="password" name="password" required />
-            <label for="pass">Mot de passe</label>
-          </div>
+    {% if error != false %}
+        <div class="card-panel red darken-4">
+            {{error}}
         </div>
+    {% endif %}
 
-        <div class="row">
-          <div class="center-align">
-            <button class="btn waves-effect waves-light brown darken-1" type="submit" name="login">Connexion
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
+    {% if success != false %}
+        <div class="card-panel green accent-3">
+            {{success}}
         </div>
-      </form><br><br>
+    {% endif %}
 
-      <div class="divider"></div><br><br><br>
+    {% if user != true %}
+
+        <div class="container homeform">
+            <form class="col s12" action="login" method="post">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="mail" class="validate" type="email" name="email" required />
+                        <label for="mail">Email</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input class="validate" id="pass" type="password" name="password" required />
+                        <label for="pass">Mot de passe</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="center-align">
+                        <button class="btn waves-effect waves-light brown darken-1" type="submit" name="login">Connexion
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form><br><br>
+
+            <div class="divider"></div><br><br><br>
 
 
-      <div class="row">
-        <div class="center-align">
-          <a href="signin" class="btn waves-effect waves-light brown darken-1">Inscription</a>
+            <div class="row">
+                <div class="center-align">
+                    <a href="signin" class="btn waves-effect waves-light brown darken-1">Inscription</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="center-align">
+                    <a href="catalog" class="btn waves-effect waves-light brown darken-1">Continuer la navigation en tant qu'invité</a>
+                </div>
+            </div>
+
         </div>
-      </div>
-
-      <div class="row">
-        <div class="center-align">
-          <a href="catalog" class="btn waves-effect waves-light brown darken-1">Continuer la navigation en tant qu'invité</a>
-        </div>
-      </div>
-
-    </div>
 
     {% else %}
 
-    <div class="align-center card medium">
-      <div class="card-image">
-        <img src="img/backgrounddefault.jpg"/>
-      </div>
-      <div class="card-content">
-        Bienvenue sur Videodorant {{user.username}}. Sur ce site, tu peux diffuser en direct des vidéos, les poster et les partager avec tes amis.
-      </div>
-    </div>
+        <div class="row">
+            <div class="align-center card medium col s10 offset-l1">
+                <div class="card-image">
+                    <img src="img/backgrounddefault.jpg"/>
+                </div>
 
-  {% endif %}
+                <div class="card-content">
+                    Bienvenue sur Videodorant {{user.username}}. Sur ce site, tu peux diffuser en direct des vidéos, les poster et les partager avec tes amis.
+                </div>
+
+                <div class="card-action">
+                    <a href="streamcreation" class="center">Commencer à diffuser</a>
+                    <a href="uploadVid" class="center">Ajouter une vidéo</a>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
 
 
 {% endblock %}

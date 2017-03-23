@@ -64,13 +64,13 @@ class ProfileController extends AbstractController{
             }else{
               $this->view['view']->render($response, 'profile.html.twig', array(
                 'user' => $_SESSION['user'],
-                'error' => 'Votre nouvelle adresse mail est déjà utilisée'
+                'error' => 'Votre nouvelle adresse mail est déjà utilisée.'
               ));
             }
           }else{
             $this->view['view']->render($response, 'profile.html.twig', array(
               'user' => $_SESSION['user'],
-              'error' => 'Vous devez remplir les champs pour modifier vos informations'
+              'error' => 'Vous devez remplir les champs pour modifier vos informations.'
             ));
           }
         }else{
@@ -94,30 +94,30 @@ class ProfileController extends AbstractController{
                 if($user = $this->sentinel->update($user, $credentials)){
                   $this->view['view']->render($response, 'profile.html.twig', array(
                     'user' => $_SESSION['user'],
-                    'success' => 'Votre mot de passe a été modifié.'
+                    'success' => 'Votre mot de passe a bien été modifié.'
                   ));
                 }else{
                   $this->view['view']->render($response, 'profile.html.twig', array(
                     'user' => $_SESSION['user'],
-                    'error' => "Erreur interne. Votre mot de passe n\'a pas été modifié. Contactez un administrateur."
+                    'error' => "Erreur interne. Votre mot de passe n'a pas été modifié. Contactez un administrateur."
                   ));
                 }
               }else{
                 $this->view['view']->render($response, 'profile.html.twig', array(
                     'user' => $_SESSION['user'],
-                    'error' => "Mot de passe de confirmation incorrect"
+                    'error' => "Les mots de passe ne correspondent pas."
                 ));
               }
             }else{
               $this->view['view']->render($response, 'profile.html.twig', array(
-                'user' => $user,
-                'error' => 'Mot de passe incorrect'
+                'user' => $_SESSION['user'],
+                'error' => 'Mot de passe incorrect.'
               ));
             }
           }else{
             $this->view['view']->render($response, 'profile.html.twig', array(
               'user' => $_SESSION['user'],
-              'error' => "Vous devez remplir les champs pour pouvoir modifier votre mot de passe"
+              'error' => "Vous devez remplir les champs pour pouvoir modifier votre mot de passe."
             ));
           }
         }else{
