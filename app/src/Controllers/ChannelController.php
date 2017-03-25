@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use App\Models\Video;
+use App\Models\Abonnements;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -74,6 +75,32 @@ final class ChannelController extends AbstractController{
 
         }
 
+    }
+
+    public function subscribe(Request $request, Response $response, $args){
+      if(isset($_SESSION['user'])){
+        if(isset($_POST['idUser'])){
+          $abo = Abonnements::where('idUser', 'like', $_POST['idUser'])->where('idAbonne', 'like', $_SESSION['user'])->count();
+          if($abo != 1){
+            $a = new Abonnements();
+            $a->idUser = $_POST['idUser'];
+            $a->idAbonne = $_SESSION['user'];
+            $a->save();
+
+            $this->view["view"]->render($response, "channel.html.twig", array(
+              "success" => "Vous êtes désormais abonné à cette chaîne."
+            ));
+          } else {
+            $this->view["view"]->render($response, "channel.html.twig", array(
+              "error" => "Vous êtes déjà abonné à cette chaîne."
+            ));
+          }
+        }
+      } else {
+        $this->view["view"]->render($response, "channel.html.twig", array(
+          "error" => "Vous devez être connecté pour vous abonner."
+        ));
+      }
     }
 
 }
