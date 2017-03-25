@@ -40,17 +40,17 @@ class LoginController extends AbstractController{
         $_SESSION['user'] = $user;
 
         return $this->view['view']->render($response, 'profile.html.twig', array(
-          'success' => 'Connexion reussie',
+          'success' => 'Connexion réussie.',
           'user' => $_SESSION['user']
         ));
       }else{
         return $this->view['view']->render($response, 'homepage.html.twig', array(
-          'error' => 'Connexion impossible, email ou mot de passe incorrect'
+          'error' => 'Connexion impossible, email ou mot de passe incorrects.'
         ));
       }
     }else{
       return $this->view['view']->render($response, 'homepage.html.twig', array(
-        'error' => 'Erreur, remplissez les champs obligatoires'
+        'error' => 'Erreur, remplissez les champs obligatoires.'
       ));
     }
   }
