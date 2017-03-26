@@ -83,53 +83,59 @@ final class ChannelController extends AbstractController{
         //On vérifie que l'id soit bien passé
         if(isset($_POST['idUser'])){
 
-          echo $_POST['idUser'];
-          $user = User::where('id', 'like', $_POST['idUser'])->get();
-          echo $user;
+          $user = User::where('id', 'like', $_POST['idUser'])->first();
+
+          if (!is_null($user)){
 
           $videos = Video::where('userId', 'like', $_POST['idUser'])->get();
           //On vérifie que l'utilisateur ne s'abonne pas à lui-même
           if($_POST['idUser'] != $_SESSION['user']->id){
 
-            $abo = Abonnements::where('idUser', 'like', $_POST['idUser'])->where('idAbonne', 'like', $_SESSION['user'])->count();
+            $abo = Abonnements::where('idUser', '=', $_POST['idUser'])
+                                ->where('idAbonne', '=', $_SESSION['user'])
+                                ->first();
             //On vérifie que l'utilisateur ne se soit pas déjà abonné
-            if($abo === 0){
+            if(is_null($abo)){
               $a = new Abonnements();
               $a->idUser = $_POST['idUser'];
               $a->idAbonne = $_SESSION['user']->id;
               $a->save();
 
-              $this->view["view"]->render($response, "channel.html.twig", array(
+              return $this->view["view"]->render($response, "channel.html.twig", array(
                 'success' => 'Vous êtes désormais abonné à cette chaîne.',
                 'channel' => $user,
-                'video' => $videos
+                'video' => $videos,
+                'user' => $_SESSION['user']
               ));
 
             } else {
 
-              $this->view["view"]->render($response, "channel.html.twig", array(
+              return $this->view["view"]->render($response, "channel.html.twig", array(
                 'error' => 'Vous êtes déjà abonné à cette chaîne.',
                 'channel' => $user,
-                'video' => $videos
+                'video' => $videos,
+                'user' => $_SESSION['user']
               ));
 
             }
           } else {
 
-            $this->view["view"]->render($response, "channel.html.twig", array(
+            return $this->view["view"]->render($response, "channel.html.twig", array(
               'error' => 'Vous ne pouvez pas vous abonner à vous même.',
               'channel' => $user,
-              'video' => $videos
+              'video' => $videos,
+              'user' => $_SESSION['user']
             ));
 
           }
         }
+        }
       } else {
 
-        $this->view["view"]->render($response, "channel.html.twig", array(
+        return $this->view["view"]->render($response, "channel.html.twig", array(
           'error' => 'Vous devez être connecté pour vous abonner.'
         ));
-        
+
       }
     }
 
