@@ -37,3 +37,5 @@ $app->post('/streamcreation', 'App\Controllers\StreamController:createStream')->
 $app->get('/stream', 'App\Controllers\StreamController:showStream')->setName('stream');
 
 $app->get('/channel', 'App\Controllers\ChannelController:showChannel')->setName('channel');
+
+$app->post('/subscribe', 'App\Controllers\ChannelController:subscribe')->setName('subscribe');
