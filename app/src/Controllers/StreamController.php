@@ -13,6 +13,7 @@ class StreamController extends AbstractController{
     protected $view;
     protected $logger;
 
+
     public function __construct($view) {
         parent::__construct($view);
     }
@@ -82,13 +83,19 @@ class StreamController extends AbstractController{
 
             $stream = Stream::where('idStream', 'like', $idStream)->first();
 
+            try{
+              exec("cvlc v4l2:///dev/video0 --sout \'#transcode{vcodec=mp4v, acodec=mp4a, mux=mp4, vb=1024}:rtp{sdp=rtsp://127.0.0.1:8554/$idStream}\' 1>/dev/null 2>&1");
+            }catch(Exception $e){
+              var_dump($e);
+            }
             // stream existe
             if(!is_null($stream)){
 
                 if(isset($_SESSION['user'])){
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'user' => $_SESSION['user'],
-                        'stream' => $stream
+                        'stream' => $stream,
+                        'idStream' => $idStream
                     ));
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
