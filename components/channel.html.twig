@@ -21,11 +21,23 @@
             <img src="assets/img/profil/{{ channel.profilPicLink }}" class="circle" style="max-height:150px"/>
             <h3 class="card-title">Chaîne de <strong>{{ channel.username }}</strong></h3>
 
-            {# pour s'abonner à une chaîne #}
-            <form action="subscribe" method="post">
-              <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
-              <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>S'abonner la chaîne</button>
-            </form>
+            {% if abo != false %}
+
+                {# pour se désabonner à une chaîne #}
+                <form action="unsubscribe" method="post">
+                  <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
+                  <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>Se désabonner à la chaîne</button>
+                </form>
+
+            {% else %}
+
+                {# pour s'abonner à une chaîne #}
+                <form action="subscribe" method="post">
+                  <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
+                  <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>S'abonner à la chaîne</button>
+                </form>
+
+            {% endif %}
 
             <div class="card-content">
 
