@@ -35,9 +35,6 @@ final class ChannelController extends AbstractController{
                                         ->where('idAbonne', '=', $_SESSION['user']->id)
                                         ->count();
 
-                    var_dump($abo);
-                    var_dump($_GET['idUser']);
-
                     if ($abo != 0){
 
                         return $this->view['view']->render($response, 'channel.html.twig', array(
@@ -126,7 +123,8 @@ final class ChannelController extends AbstractController{
                   'success' => 'Vous êtes désormais abonné à cette chaîne.',
                   'channel' => $user,
                   'video' => $videos,
-                  'user' => $_SESSION['user']
+                  'user' => $_SESSION['user'],
+                  'abo' => 'abonne'
                 ));
 
               } else {

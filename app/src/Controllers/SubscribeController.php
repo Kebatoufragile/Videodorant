@@ -33,17 +33,16 @@ final class SubscribeController extends AbstractController {
     //à compléter/corriger plus tard
     public function displaySubscribes(){
 
-      /*if(isset($_SESSION['user'])){
-        $abos = Abonnements::where('idAbonne', 'like', $_SESSION['userId'])->get();*/
+      if(isset($_SESSION['user'])){
+        $abos = Abonnements::where('idAbonne', 'like', $_SESSION['user']->id)->get();
         $chan = [];
 
-        /*foreach ($abos as $abo)
-          $chan[] = User::where('id', 'like', $abo->idUser)->first();*/
+        foreach ($abos as $abo)
+          $chan[] = User::where('id', 'like', $abo->idUser)->first();
 
         return $chan;
+      }
     }
 
 
 }
-
- ?>
