@@ -30,11 +30,15 @@ final class ChannelController extends AbstractController{
 
                 if(isset($_SESSION['user'])){
 
-                    $abo = Abonnements::where('idUser', '=', $_POST['idUser'])
-                                        ->where('idAbonne', '=', $_SESSION['user'])
-                                        ->first();
 
-                    if (!is_null($abo)){
+                    $abo = Abonnements::where('idUser', '=', $_GET['idUser'])
+                                        ->where('idAbonne', '=', $_SESSION['user']->id)
+                                        ->count();
+
+                    var_dump($abo);
+                    var_dump($_GET['idUser']);
+
+                    if ($abo != 0){
 
                         return $this->view['view']->render($response, 'channel.html.twig', array(
                             'user' => $_SESSION['user'],
@@ -109,7 +113,7 @@ final class ChannelController extends AbstractController{
             if($_POST['idUser'] != $_SESSION['user']->id){
 
               $abo = Abonnements::where('idUser', '=', $_POST['idUser'])
-                                  ->where('idAbonne', '=', $_SESSION['user'])
+                                  ->where('idAbonne', '=', $_SESSION['user']->id)
                                   ->first();
               //On vérifie que l'utilisateur ne se soit pas déjà abonné
               if(is_null($abo)){
@@ -166,7 +170,7 @@ final class ChannelController extends AbstractController{
           $videos = Video::where('userId', 'like', $_POST['idUser'])->get();
 
           $abo = Abonnements::where('idUser', '=', $_POST['idUser'])
-                              ->where('idAbonne', '=', $_SESSION['user'])
+                              ->where('idAbonne', '=', $_SESSION['user']->id)
                               ->delete();
 
           return $this->view["view"]->render($response, "channel.html.twig", array(
