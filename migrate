@@ -205,7 +205,7 @@ class Migrator {
             Capsule::schema()->create('throttle', function($table)
             {
                 $table->increments('id');
-                $table->integer('user_id')->unsigned();
+                $table->integer('user_id')->unsigned()->nullable();
                 $table->string('type');
                 $table->string('ip')->nullable();
                 $table->timestamps();
