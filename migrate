@@ -8,7 +8,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 
 class Migrator {
-	
+
     /**
      * migrate the database schema
      */
@@ -22,7 +22,7 @@ class Migrator {
                 $table->increments('id');
                 $table->string('email');
                 $table->string('password');
-                $table->text('permissions');
+                $table->text('permissions')->nullable();
                 $table->timestamp('last_login')->nullable();
                 $table->string('first_name')->nullable();
                 $table->string('last_name')->nullable();
@@ -34,9 +34,77 @@ class Migrator {
                 $table->unique('email');
                 $table->index('first_name');
                 $table->index('last_name');
+								$table->string('username');
+								$table->string('profilPicLink');
             });
         }
 
+				if (!Capsule::schema()->hasTable('abonnements')) {
+            Capsule::schema()->create('abonnements', function($table)
+            {
+                $table->increments('idAbonnement');
+                $table->integer('idAbonne');
+								$table->integer('idUser');
+
+								$table->engine = 'InnoDB';
+            });
+        }
+
+				if (!Capsule::schema()->hasTable('categorie')) {
+            Capsule::schema()->create('categorie', function($table)
+            {
+                $table->increments('idCategorie');
+                $table->string('name');
+
+								$table->engine = 'InnoDB';
+            });
+        }
+
+				if (!Capsule::schema()->hasTable('categorie_stream')) {
+            Capsule::schema()->create('categorie_stream', function($table)
+            {
+                $table->increments('idCategorieStream');
+                $table->integer('idStream');
+								$table->integer('idCategorie');
+
+								$table->engine = 'InnoDB';
+            });
+        }
+
+				if (!Capsule::schema()->hasTable('stream')) {
+            Capsule::schema()->create('stream', function($table)
+            {
+                $table->increments('idStream');
+                $table->integer('idUser');
+								$table->string('name');
+
+								$table->engine = 'InnoDB';
+            });
+        }
+
+				if (!Capsule::schema()->hasTable('tags')) {
+            Capsule::schema()->create('tags', function($table)
+            {
+                $table->increments('idTag');
+                $table->integer('idStream');
+								$table->string('tag');
+
+								$table->engine = 'InnoDB';
+            });
+        }
+
+				if (!Capsule::schema()->hasTable('video')) {
+            Capsule::schema()->create('video', function($table)
+            {
+                $table->increments('id');
+                $table->text('link');
+								$table->string('title');
+								$table->text('description');
+								$table->integer('userId');
+
+								$table->engine = 'InnoDB';
+            });
+        }
         /**
          * create table for sentinel activations
          */
@@ -74,7 +142,7 @@ class Migrator {
 				$table->unique('code');
             });
         }
-		
+
 		/**
          * create reminders table
          */
@@ -93,7 +161,7 @@ class Migrator {
                 $table->engine = 'InnoDB';
             });
         }
-		
+
 		/**
          * create roles table
          */
@@ -112,7 +180,7 @@ class Migrator {
 				$table->unique('slug');
             });
         }
-		
+
 		/**
          * create role_users table
          */
@@ -137,7 +205,7 @@ class Migrator {
             Capsule::schema()->create('throttle', function($table)
             {
                 $table->increments('id');
-                $table->integer('user_id')->unsigned();
+                $table->integer('user_id')->unsigned()->nullable();
                 $table->string('type');
                 $table->string('ip')->nullable();
                 $table->timestamps();
@@ -163,7 +231,7 @@ class Migrator {
 			];
 
 			$user = Sentinel::registerAndActivate($credentials);
-			
+
         } catch(Exception $e) {
             echo $e->getMessage()."\n";
         }
