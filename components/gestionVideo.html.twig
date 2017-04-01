@@ -1,4 +1,4 @@
-{% extends base.html.twig %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
 
@@ -20,13 +20,41 @@
 
             <h1 class="card-title white-text center-align">Gérer les vidéos</h1>
 
-            {% for vid in videos %}
+            {% for video in videos %}
 
               <div class="card">
 
-              <div class="card-image waves-effect waves-block">
-                  <img class="activator" src="assets/img/miniatures/{{ video.minLink }}"/>
-              </div>
+                  <div class="card-image waves-effect waves-block">
+                      <img class="activator" src="assets/img/miniatures/{{ video.minLink }}"/>
+                  </div>
+
+                  <div class="card-content">
+                      <span class="card-title activator">{{ video.title }}<i class="material-icons right">more_vert</i></span>
+                      <p><a href="video?idVideo={{ video.id }}">Voir la vidéo</a></p>
+
+                      <form action="delVideo" method="post">
+                          <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
+                          <button class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Supprimer la vidéo</button>
+                      </form>
+
+                      {% if video.state == "publique" %}
+
+                          <form action="changeStateVideo" method="post">
+                              <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
+                              <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>Passer la vidéo en privée</button>
+                          </form>
+
+                      {% else %}
+
+                          <form action="changeStateVideo" method="post">
+                              <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
+                              <button class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Passer la vidéo en publique</button>
+                          </form>
+
+                      {% endif %}
+
+
+                  </div>
 
               </div>
 
