@@ -1,5 +1,7 @@
 # Installer l'application Videodorant
 
+Voici le manuel d'installation pour utiliser notre application Videodorant.
+
 ##### 1 Télécharger le projet
 Vous pouvez récupérer manuellement le projet en utilisant la commande git clone, ou en téléchargement directement le .zip sur le github.
 Puis, utilisez ```composer install```
