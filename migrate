@@ -101,6 +101,7 @@ class Migrator {
 								$table->string('title');
 								$table->text('description');
 								$table->integer('userId');
+                $table->string('state')->nullable();
 
 								$table->engine = 'InnoDB';
             });
