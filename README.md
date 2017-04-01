@@ -1,54 +1,29 @@
-# Boilerplate for Slim Framework 3 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=purwantoyudi42%40gmail%2ecom&lc=ZA&item_name=Timex%20Studio&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-  Boilerplate for getting started with Slim Framework
-  
-  Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3.
-  
-###Requirements:
-- PHP 5.5 or newer
-- PDO PHP Extension
-	
-###Features
+# Installer l'application Videodorant
 
-
-- PHP View
-- Twig Template Engine
-- Eloquent Laravel
-- Sentinel Authentication provider
-- Include SDK Facebook
-- Logger Monolog
-- AdminLTE soon
-
-
-#####1 Manual Install
-You can manually install by cloning this repo or download the zip file from this repo, and run ```composer install```.
+##### 1 Télécharger le projet
+Vous pouvez récupérer manuellement le projet en utilisant la commande git clone, ou en téléchargement directement le .zip sur le github.
+Puis, utilisez ```composer install```
 ```
-$ git clone https://github.com/zhiephie/boilerplate-slim3.git
+$ git clone git@github.com:Kebatoufragile/Videodorant.git
 $ composer install
 ```
 
-#####2 Alternative install via ```composer```
-```
-$ composer create-project --no-interaction --stability=dev zhiephie/boilerplate-slim3 [folder-name]
-```
-
-#####3 Setup Permission
-After composer finished install the dependencies, you need to change file and folder permission.
+##### 2 Permissions
+Après avoir fini d'installer les dépendances, assurez vous de bien changer les permissions.
 ```
 $ chmod -R 777 storage
 $ chmod 666 config/database.php
 ```
 
-#####4 Configuration Database and Setting App
-Configuration file located in ```config```, edit the database.php, setting.php
+##### 3 Configurer la base de données
+Éditez le fichier ```config/database.php``` pour bien mettre vos identifiants de base de données. A la ligne ``` 'database'```, assurez vous de bien mettre le nom 'Videodorant'
 
-#####5 Run ```php migrate```
+##### 4 Installer la base de données
+Avant d'utiliser la commande qui suit, veuillez vous assurer d'avoir bien créée préalablement une base de données vide nommée Videodorant dans votre gestionnaire de base de données.
 ```
 $ php migrate
 ```
 
-#####6 Run Server  ```php -S localhost:8000 -t public```
-```
-$ php -S localhost:8000 -t public
-```
+##### 5 Lancez votre serveur
 
-###That's it! Now go build something cool.
+### Vous pouvez dès à présent accéder à notre application Videodorant depuis votre localhost !
