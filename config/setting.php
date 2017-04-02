@@ -20,12 +20,12 @@ return [
             'name' => 'slim-app',
             'path' => PATH_ROOT.'../storage/log/server.log',
         ],
-		
-		// Facebook App
-		'facebook' => [
-			'app_id' => '',
-			'app_secret' => '',
-			'default_graph_version' => 'v2.5',
-		],
+
+        // Facebook App
+        'facebook' => [
+            'app_id' => '',
+            'app_secret' => '',
+            'default_graph_version' => 'v2.5',
+        ],
     ],
 ];
