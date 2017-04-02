@@ -84,10 +84,11 @@ class StreamController extends AbstractController{
             $stream = Stream::where('idStream', 'like', $idStream)->first();
 
             try{
-              exec("nohup cvlc v4l2:///dev/video0 --sout \'#transcode{vcodec=mp4v, acodec=mp4a, mux=mp4, vb=1024}:rtp{sdp=rtsp://127.0.0.1:8554/$idStream}\' 1>/dev/null 2>/dev/null &", $output);
-              var_dump($output);
+                exec("nohup vlc -vvv --sout '#transcode{vcodec=mp4v, acodec=mp4a, mux=mp4, vb=1024}:rtp{mux=ts,sdp=sap,dst=127.0.0.1:8554/$idStream}' 1>/dev/null 2>/dev/null &", $output, $a);
+                var_dump($output);
+                var_dump($a);
             }catch(Exception $e){
-              var_dump($e);
+                var_dump($e);
             }
             // stream existe
             if(!is_null($stream)){
@@ -100,7 +101,7 @@ class StreamController extends AbstractController{
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'stream' => $stream
-                      ));
+                    ));
                 }
 
             }else{ //stream existe pas

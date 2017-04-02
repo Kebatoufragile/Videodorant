@@ -30,7 +30,7 @@ final class SubscribeController extends AbstractController {
 
     }
 
-    //à compléter/corriger plus tard
+
     public function displaySubscribes(){
 
       if(isset($_SESSION['user'])){
