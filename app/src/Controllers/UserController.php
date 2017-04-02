@@ -10,7 +10,6 @@ final class UserController
 {
     private $view;
     private $logger;
-    private $user;
 
     public function __construct($view, LoggerInterface $logger, $user)
     {
