@@ -16,7 +16,7 @@ $container['view'] = function ($c) {
         'debug' => $settings['debug'],
         'cache' => $settings['cache_path']
     ]);
-	// Add extensions
+    // Add extensions
     $view->addExtension(new \Slim\Views\TwigExtension(
         $c['router'],
         $c['request']->getUri()
@@ -41,35 +41,35 @@ $container['logger'] = function ($c) {
 };
 
 $container['facebook'] = function ($c) {
-	$settings = $c->get('settings')['facebook'];
-	$fb= new Facebook\Facebook([
-	  'app_id' => $settings['app_id'],
-	  'app_secret' => $settings['app_secret'],
-	  'default_graph_version' => $settings['default_graph_version'],
-	]);
-	return $fb;
+    $settings = $c->get('settings')['facebook'];
+    $fb= new Facebook\Facebook([
+        'app_id' => $settings['app_id'],
+        'app_secret' => $settings['app_secret'],
+        'default_graph_version' => $settings['default_graph_version'],
+    ]);
+    return $fb;
 };
 
 // error handle
 $container['errorHandler'] = function ($c) {
-  return function ($request, $response, $exception) use ($c) {
-    $data = [
-      'code' => $exception->getCode(),
-      'message' => $exception->getMessage(),
-      'file' => $exception->getFile(),
-      'line' => $exception->getLine(),
-      'trace' => explode("\n", $exception->getTraceAsString()),
-    ];
+    return function ($request, $response, $exception) use ($c) {
+        $data = [
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'trace' => explode("\n", $exception->getTraceAsString()),
+        ];
 
-    return $c->get('response')->withStatus(500)
-             ->withHeader('Content-Type', 'application/json')
-             ->write(json_encode($data));
-  };
+        return $c->get('response')->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->write(json_encode($data));
+    };
 };
 
 // Generate Activation Code
 $container['activation'] = function ($c) {
-	return new \Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
+    return new \Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
 };
 
 # -----------------------------------------------------------------------------
@@ -78,17 +78,17 @@ $container['activation'] = function ($c) {
 
 $container['App\Controllers\HomeController'] = function ($c) {
     return new App\Controllers\HomeController(
-		$c->get('view'),
-		$c->get('logger'),
-		$c->get('App\Repositories\HomeRepository')
+        $c->get('view'),
+        $c->get('logger'),
+        $c->get('App\Repositories\HomeRepository')
     );
 };
 
 $container['App\Controllers\UserController'] = function ($c) {
     return new App\Controllers\UserController(
-		$c->get('view'),
-		$c->get('logger'),
-		$c->get('App\Repositories\UserRepository')
+        $c->get('view'),
+        $c->get('logger'),
+        $c->get('App\Repositories\UserRepository')
     );
 };
 # -----------------------------------------------------------------------------
@@ -104,13 +104,13 @@ $container['Model\User'] = function ($c) {
 # -----------------------------------------------------------------------------
 
 $container['App\Repositories\HomeRepository'] = function ($c) {
-	return new App\Repositories\HomeRepository(
+    return new App\Repositories\HomeRepository(
         $c->get('Model\User')
-	);
+    );
 };
 
 $container['App\Repositories\UserRepository'] = function ($c) {
-	return new App\Repositories\UserRepository(
+    return new App\Repositories\UserRepository(
         $c->get('Model\User')
-	);
+    );
 };

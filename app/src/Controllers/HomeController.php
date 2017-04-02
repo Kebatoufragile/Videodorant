@@ -10,7 +10,7 @@ final class HomeController
 {
     private $view;
     private $logger;
-	private $user;
+    private $user;
 
     public function __construct($view, LoggerInterface $logger, $user)
     {
@@ -22,11 +22,11 @@ final class HomeController
     public function dispatch(Request $request, Response $response, $args)
     {
         if(isset($_SESSION['user'])){
-          return $this->view->render($response, 'homepage.html.twig', array(
-            'user' => $_SESSION['user']
-          ));
+            return $this->view->render($response, 'homepage.html.twig', array(
+                'user' => $_SESSION['user']
+            ));
         }else{
-          return $this->view->render($response, 'homepage.html.twig');
+            return $this->view->render($response, 'homepage.html.twig');
         }
     }
 }
