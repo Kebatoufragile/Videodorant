@@ -18,14 +18,14 @@ final class SubscribeController extends AbstractController {
 
     public function dispatch(Request $request, Response $response, $args) {
         if(isset($_SESSION['user'])){
-          return $this->view['view']->render($response, 'abo.html.twig', array(
-            'user' => $_SESSION['user'],
-            'users' => $this->displaySubscribes()
-          ));
+            return $this->view['view']->render($response, 'abo.html.twig', array(
+                'user' => $_SESSION['user'],
+                'users' => $this->displaySubscribes()
+            ));
         }else{
-          return $this->view['view']->render($response, 'abo.html.twig', array(
-            'error' => 'Vous devez être connecté pour accéder à cette page'
-          ));
+            return $this->view['view']->render($response, 'abo.html.twig', array(
+                'error' => 'Vous devez être connecté pour accéder à cette page'
+            ));
         }
 
     }
@@ -33,15 +33,15 @@ final class SubscribeController extends AbstractController {
 
     public function displaySubscribes(){
 
-      if(isset($_SESSION['user'])){
-        $abos = Abonnements::where('idAbonne', 'like', $_SESSION['user']->id)->get();
-        $chan = [];
+        if(isset($_SESSION['user'])){
+            $abos = Abonnements::where('idAbonne', 'like', $_SESSION['user']->id)->get();
+            $chan = [];
 
-        foreach ($abos as $abo)
-          $chan[] = User::where('id', 'like', $abo->idUser)->first();
+            foreach ($abos as $abo)
+                $chan[] = User::where('id', 'like', $abo->idUser)->first();
 
-        return $chan;
-      }
+            return $chan;
+        }
     }
 
 

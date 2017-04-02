@@ -2,17 +2,17 @@
 
 {% block content %}
 
-  {% if error != false %}
-    <div class="card-panel red darken-4">
-      {{error}}
-    </div>
-  {% endif %}
+    {% if error != false %}
+      <div class="card-panel red darken-4">
+          {{error}}
+      </div>
+    {% endif %}
 
-  {% if success != false %}
-    <div class="card-panel green accent-3">
-      {{success}}
-    </div>
-  {% endif %}
+    {% if success != false %}
+      <div class="card-panel green accent-3">
+          {{success}}
+      </div>
+    {% endif %}
 
   <div class="row">
     <form action="uploadVid" method="post" enctype="multipart/form-data" class="col s12">

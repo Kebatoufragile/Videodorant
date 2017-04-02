@@ -2,48 +2,48 @@
 
 {% block content %}
 
-{% if error != false %}
+    {% if error != false %}
 
-  <div class="card-panel red darken-4">
-    {{error}}
-  </div>
-{% endif %}
+        <div class="card-panel red darken-4">
+            {{error}}
+        </div>
+    {% endif %}
 
-  <div class="row">
-    <form action="register" method="post" enctype="multipart/form-data" class="col s12">
-      <div class="row">
-        <div class="input-field col s2">
-          <input placeholder="Nom" id="nom" type="text" class="validate" name="nom">
-          <label for="nom">Nom</label>
-        </div>
-        <div class="input-field col s2">
-          <input id="identifiant" type="text" class="validate" name="identifiant">
-          <label for="identifiant">Identifiant</label>
-        </div>
-        <div class="input-field col s2">
-          <input id="email" type="email" class="validate" name="email">
-          <label for="email">E-Mail</label>
-        </div>
-      </div>
-      <div class="row">
-          <div class="input-field col s2">
-            <input id="prenom" type="text" class="validate" name="prenom">
-            <label for="prenom">Prénom</label>
-          </div>
-          <div class="input-field col s2">
-            <input id="password" type="password" class="validate" name="password">
-            <label for="password">Mot de Passe</label>
-          </div>
-          <div class="input-field col s2">
+    <div class="row">
+        <form action="register" method="post" enctype="multipart/form-data" class="col s12">
+            <div class="row">
+                <div class="input-field col s2">
+                    <input placeholder="Nom" id="nom" type="text" class="validate" name="nom">
+                    <label for="nom">Nom</label>
+                </div>
+                <div class="input-field col s2">
+                    <input id="identifiant" type="text" class="validate" name="identifiant">
+                    <label for="identifiant">Identifiant</label>
+                </div>
+                <div class="input-field col s2">
+                    <input id="email" type="email" class="validate" name="email">
+                    <label for="email">E-Mail</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s2">
+                    <input id="prenom" type="text" class="validate" name="prenom">
+                    <label for="prenom">Prénom</label>
+                </div>
+                <div class="input-field col s2">
+                    <input id="password" type="password" class="validate" name="password">
+                    <label for="password">Mot de Passe</label>
+                </div>
+                <div class="input-field col s2">
               <span class="white-text" >Choisissez votre photo de profil (Max 900x1200)<span>
               <input type="file" id="picture" name="picture" placeholder="Parcourir" required>
-          </div>
-      </div>
-      <div class="row">
-        <button class="btn waves-effect waves-light" name="register">S'inscrire</button>
-      </div>
-    </form>
-  </div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light" name="register">S'inscrire</button>
+            </div>
+        </form>
+    </div>
 
 
 
