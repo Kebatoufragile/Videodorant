@@ -123,7 +123,7 @@ final class ChannelController extends AbstractController{
                             return $this->view["view"]->render($response, "channel.html.twig", array(
                                 'success' => 'Vous êtes désormais abonné à cette chaîne.',
                                 'channel' => $user,
-                                'video' => $videos,
+                                'videos' => $videos,
                                 'user' => $_SESSION['user'],
                                 'abo' => 'abonne'
                             ));
@@ -133,7 +133,7 @@ final class ChannelController extends AbstractController{
                             return $this->view["view"]->render($response, "channel.html.twig", array(
                                 'error' => 'Vous êtes déjà abonné à cette chaîne.',
                                 'channel' => $user,
-                                'video' => $videos,
+                                'videos' => $videos,
                                 'user' => $_SESSION['user']
                             ));
 
@@ -144,7 +144,7 @@ final class ChannelController extends AbstractController{
                         return $this->view["view"]->render($response, "channel.html.twig", array(
                             'error' => 'Vous ne pouvez pas vous abonner à vous même.',
                             'channel' => $user,
-                            'video' => $videos,
+                            'videos' => $videos,
                             'user' => $_SESSION['user']
                         ));
 
