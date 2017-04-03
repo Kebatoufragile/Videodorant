@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\Video;
-use App\Models\User;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+
+define('VIDEOPATH', "../public/assets/media/");
+define('MINPATH', "../public/assets/img/miniatures/");
 
 final class gestionVidController extends AbstractController{
 
@@ -43,7 +45,14 @@ final class gestionVidController extends AbstractController{
 
             if(isset($_POST['idVideo'])){
 
-                $supp = Video::where('id', 'like', $_POST['idVideo'])->delete();
+                $video = Video::where('id', 'like', $_POST['idVideo'])->first();
+
+                unlink(VIDEOPATH.$_POST['idVideo']);
+                unlink(MINPATH.$video->minlink);
+
+                Video::where('id', 'like', $_POST['idVideo'])->delete();
+
+
 
                 $videos = Video::where('userId', 'like', $_SESSION['user']->id)->get();
 
