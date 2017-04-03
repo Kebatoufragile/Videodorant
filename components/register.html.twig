@@ -9,40 +9,58 @@
         </div>
     {% endif %}
 
+
     <div class="row">
-        <form action="register" method="post" enctype="multipart/form-data" class="col s12">
-            <div class="row">
-                <div class="input-field col s2">
-                    <input id="nom" type="text" class="validate" name="nom">
-                    <label for="nom">Nom</label>
+
+        <div class="card blue-grey darken-2 z-depth-5 center-align col s10 push-l1">
+
+            <h3 class="card-title">Inscription</h3>
+
+            <form action="register" method="post" enctype="multipart/form-data" class="col s12">
+
+                <div class="row">
+
+                    <div class="input-field col s6">
+                        <input id="nom" type="text" class="validate" name="nom">
+                        <label for="nom">Nom</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="prenom" type="text" class="validate" name="prenom">
+                        <label for="prenom">Prénom</label>
+                    </div>
+
                 </div>
-                <div class="input-field col s2">
+
+                <div class="input-field">
                     <input id="identifiant" type="text" class="validate" name="identifiant">
                     <label for="identifiant">Identifiant</label>
                 </div>
-                <div class="input-field col s2">
+
+                <div class="input-field">
                     <input id="email" type="email" class="validate" name="email">
                     <label for="email">E-Mail</label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s2">
-                    <input id="prenom" type="text" class="validate" name="prenom">
-                    <label for="prenom">Prénom</label>
-                </div>
-                <div class="input-field col s2">
+
+                <div class="input-field">
                     <input id="password" type="password" class="validate" name="password">
                     <label for="password">Mot de Passe</label>
                 </div>
-                <div class="input-field col s2">
-              <span class="white-text" >Choisissez votre photo de profil (Max 900x1200)<span>
-              <input type="file" id="picture" name="picture" placeholder="Parcourir" required>
+
+                <div class="input-field">
+                    <span class="white-text" >Choisissez votre photo de profil (Max 900x1200)</span>
+                    <input type="file" id="picture" name="picture" placeholder="Parcourir" required>
+                </div><br>
+
+
+                <div class="row">
+                    <button class="btn waves-effect blue-grey darken-4" name="register">S'inscrire</button>
                 </div>
-            </div>
-            <div class="row">
-                <button class="btn waves-effect waves-light" name="register">S'inscrire</button>
-            </div>
-        </form>
+
+            </form>
+
+        </div>
+
     </div>
 
 
