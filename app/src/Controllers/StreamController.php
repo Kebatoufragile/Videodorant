@@ -93,7 +93,7 @@ class StreamController extends AbstractController{
                 echo('NOP');
               }
             }catch(Exception $e){
-              var_dump($e);
+                var_dump($e);
             }
             // stream existe
             if(!is_null($stream)){
@@ -106,7 +106,7 @@ class StreamController extends AbstractController{
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'stream' => $stream
-                      ));
+                    ));
                 }
 
             }else{ //stream existe pas
