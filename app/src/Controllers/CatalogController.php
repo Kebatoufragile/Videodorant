@@ -38,20 +38,34 @@ final class CatalogController extends AbstractController{
     }
 
     private function getVideosWhenLogged(){
-        $abonnements = Abonnements::where('id', 'like', $_SESSION['id'])->get();
+        $abonnements = Abonnements::where('idAbonne', 'like', $_SESSION['user']->id)->get();
 
         $videos = array();
 
-        foreach($abonnements as $k=>$v){
-            $video = Video::where('idUser', 'like', $v->idUser)->last();
-            array_push($videos, $video);
-        }
+        if(count($abonnements) > 0){
+            foreach($abonnements as $k=>$v){
+                $video = Video::where('idUser', 'like', $v->idUser)->last();
+                $video->user = User::where('id', 'like', $video->userId)->first()->username;
+                array_push($videos, $video);
+            }
+        }else
+            return $this->getVideosWhenNotLogged();
+
 
         return $videos;
     }
 
     private function getVideosWhenNotLogged(){
-        return Video::orderBy('dateAjout', 'desc')->take(30)->get();
+
+        $videos = Video::orderBy('dateAjout', 'desc')->take(30)->get();
+
+        foreach($videos as $k=>$v){
+            $u = User::where('id', 'like', $v->userId)->first();
+            var_dump($v->userId);
+            $v->user = $u->username;
+        }
+
+        return $videos;
     }
 
 }
