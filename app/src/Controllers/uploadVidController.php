@@ -81,6 +81,10 @@ final class uploadVidController extends AbstractController{
                             $vid->userId = $userId;
 
                             if(!empty($_FILES['miniature']['name'])){
+
+                                if(!file_exists(MIN_TARGET))
+                                    mkdir(MIN_TARGET, 0777, true);
+
                                 $minExt = pathinfo($_FILES['miniature']['name'], PATHINFO_EXTENSION);
 
                                 if(in_array(strtolower($minExt), $tabExtMin)){
