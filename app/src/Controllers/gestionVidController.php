@@ -20,7 +20,7 @@ final class gestionVidController extends AbstractController{
 
         if(isset($_SESSION['user'])){
 
-          $videos = Video::where('idUser', 'like', $_SESSION['user']->id);
+          $videos = Video::where('userId', '=', $_SESSION['user']->id)->get();
 
           return $this->view['view']->render($response, 'gestionVideo.html.twig', array(
             'user' => $_SESSION['user'],
@@ -45,7 +45,7 @@ final class gestionVidController extends AbstractController{
 
                 $supp = Video::where('id', 'like', $_POST['idVideo'])->delete();
 
-                $videos = Video::where('idUser', 'like', $_SESSION['user']->id)->get();
+                $videos = Video::where('userId', 'like', $_SESSION['user']->id)->get();
 
                 return $this->view['view']->render($response, 'gestionVideo.html.twig', array(
                   'user' => $_SESSION['user'],
@@ -56,7 +56,7 @@ final class gestionVidController extends AbstractController{
 
             } else {
 
-              $videos = Video::where('idUser', '=', $_SESSION['user']->id)->get();
+              $videos = Video::where('userId', '=', $_SESSION['user']->id)->get();
 
               return $this->view['view']->render($response, 'gestionVideo.html.twig', array(
                 'user' => $_SESSION['user'],
@@ -88,22 +88,24 @@ final class gestionVidController extends AbstractController{
                 if($vid->state === "publique"){
                   $vid->state = "privee";
                   $vid->save();
+                  $state = 'Votre vidéo a été passée en privée avec succès';
                 } else {
                   $vid->state = "publique";
                   $vid->save();
+                  $state = 'Votre vidéo a été passée en publique avec succès';
                 }
 
-                $videos = Video::where('idUser', 'like', $_SESSION['user']->id)->get();
+                $videos = Video::where('userId', 'like', $_SESSION['user']->id)->get();
 
                 return $this->view['view']->render($response, 'gestionVideo.html.twig', array(
                   'user' => $_SESSION['user'],
                   'videos' => $videos,
-                  'success' => 'Votre vidéo a été passée en privée avec succès'
+                  'success' => $state
                 ));
 
             } else {
 
-              $videos = Video::where('idUser', 'like', $_SESSION['user']->id);
+              $videos = Video::where('userId', 'like', $_SESSION['user']->id);
 
               return $this->view['view']->render($response, 'gestionVideo.html.twig', array(
                 'user' => $_SESSION['user'],
