@@ -44,7 +44,7 @@ final class CatalogController extends AbstractController{
 
         if(count($abonnements) > 0){
             foreach($abonnements as $k=>$v){
-                $video = Video::where('idUser', 'like', $v->idUser)->last();
+                $video = Video::orderBy('dateAjout', 'desc')->first();
                 $video->user = User::where('id', 'like', $video->userId)->first()->username;
                 array_push($videos, $video);
             }
