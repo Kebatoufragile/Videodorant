@@ -116,7 +116,7 @@ final class uploadVidController extends AbstractController{
                         }else{
                             //Sinon on affiche une erreur système
                             return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                                "error" => "Problème d\'upload"
+                                "error" => "Problème d'upload"
                             ));
                             //$message = 'Problème d\'upload.';
                         }
@@ -136,7 +136,7 @@ final class uploadVidController extends AbstractController{
                 }else{
                     //Sinon on affiche une erreur sur l'extension
                     return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                        "error" => "L\'extension du fichier n\'est pas correct"
+                        "error" => "L'extension du fichier n'est pas correct"
                     ));
                     //$message = 'L\'extension du fichier n\'est pas correct.';
                 }
@@ -149,7 +149,7 @@ final class uploadVidController extends AbstractController{
             }
         }else{
             return $this->view['view']->render($response, 'videoUpload.html.twig', array(
-                "error" => "Aucun fichier n\'a été envoyé"
+                "error" => "Aucun fichier n'a été envoyé"
             ));
             //$message = "Aucun fichier n'\a été envoyé";
         }
