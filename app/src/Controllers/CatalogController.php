@@ -65,7 +65,6 @@ final class CatalogController extends AbstractController{
 
         foreach($videos as $k=>$v){
             $u = User::where('id', 'like', $v->userId)->first();
-            var_dump($v->userId);
             $v->user = $u->username;
         }
 

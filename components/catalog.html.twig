@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="card-action grey">
-                                    <a class="black-text" href="video?id={{ video.id }}">Voir la vidéo</a>
+                                    <a class="black-text" href="video?idVideo={{ video.id }}">Voir la vidéo</a>
                                     {% if user.id == video.userId %}
                                         <a class="white-text right" href="channel?idUser="{{ video.userId }}>@{{ video.user }}</a>
                                     {% endif %}
