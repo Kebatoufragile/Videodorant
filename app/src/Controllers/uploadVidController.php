@@ -83,6 +83,7 @@ final class uploadVidController extends AbstractController{
                             $vid->title = $titre;
                             $vid->description = $desc;
                             $vid->userId = $userId;
+                            $vid->state = $_POST['statut'];
 
                             if(!empty($_FILES['miniature']['name'])){
 

@@ -103,6 +103,7 @@ class Migrator {
                 $table->integer('userId');
                 $table->string('state')->nullable();
                 $table->date('dateAjout');
+                $table->string('minLink');
 
                 $table->engine = 'InnoDB';
             });
