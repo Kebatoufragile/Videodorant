@@ -26,7 +26,7 @@ final class ChannelController extends AbstractController{
 
             if(!is_null($user)){
 
-                $videos = Video::where('idUser', 'like', $_GET['idUser']);
+                $videos = Video::where('userId', 'like', $_GET['idUser'])->get();
 
                 if(isset($_SESSION['user'])){
 
