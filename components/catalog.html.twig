@@ -27,12 +27,14 @@
                                     <span class="card-title">{{ video.title }}</span>
                                 </div>
                                 <div class="card-content">
-                                    <p>{{ video.desc }}</p>
+                                    <p>{{ video.description }}</p>
                                 </div>
-                                <div class="card-action grey">
-                                    <a class="black-text" href="video?id={{ video.id }}">See the video</a>
-                                    <a class="white-text right" href="channel?idUser="{{ video.idUser }}>@{{ video.user }}</a>
-                                </div>
+                                {% if user.id == video.userId %}
+                                    <div class="card-action grey">
+                                        <a class="black-text" href="video?id={{ video.id }}">Voir la vidéo</a>
+                                        <a class="white-text right" href="channel?idUser="{{ video.userId }}>@{{ video.user }}</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
 
