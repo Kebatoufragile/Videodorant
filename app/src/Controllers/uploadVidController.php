@@ -60,6 +60,10 @@ final class uploadVidController extends AbstractController{
                     //if($sizeVid >= MAX_SIZE){
                     //On vérifie les dimensions et taille de l'image
                     //Parcours du tableau d'erreur
+
+                    if(!file_exists(TARGET))
+                        mkdir(TARGET, 0777, true);
+
                     if(isset($_FILES['video']['error']) && UPLOAD_ERR_OK === $_FILES['video']['error']){
                         //On renomme le fichier
                         $nomVideo = md5(uniqid()).'.'.$extension;
