@@ -47,3 +47,5 @@ $app->get('/gestionVideos', 'App\Controllers\gestionVidController:dispatch')->se
 $app->post('/delVideo', 'App\Controllers\gestionVidController:supprimerVideo')->setName('delVideo');
 
 $app->post('/changeStateVideo', 'App\Controllers\gestionVidController:changeStateVid')->setName('changeStateVideo');
+
+$app->get('/video', 'App\Controllers\VideoController:showVideo')->setName('video');
