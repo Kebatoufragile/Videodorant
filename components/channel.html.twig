@@ -58,21 +58,23 @@
 
                                         <div class="col s12 m12 l4">
                                             <div class="card">
-                                                <div class="card-image waves-effect waves-block">
+                                                <div class="card-image waves-effect waves-block" style="height:200px">
                                                     <img class="activator" src="assets/img/miniatures/{{ video.minLink }}"/>
                                                 </div>
 
-                                                <div class="card-content">
+                                                <div class="card-content" style="height:150px">
                                                     <span class="card-title activator">{{ video.title }}<i class="material-icons right">more_vert</i></span>
                                                     <p>{{ video.description }}</p>
                                                     <p><a href="video?idVideo={{ video.id }}">Voir la vidéo</a></p>
                                                 </div>
 
-                                                <div class="card-reveal activator">
-                                                    <span class="card-title">Gérer la vidéo<i class="material-icons right">close</i></span>
-                                                    <a href="modify?idVideo={{ video.id }}">Modifier</a><br>
-                                                    <a href="delete?idVideo={{ video.id }}">Supprimer</a>
-                                                </div>
+                                                {% if user.id == video.userId %}
+                                                    <div class="card-reveal activator">
+                                                        <span class="card-title">Gérer la vidéo<i class="material-icons right">close</i></span>
+                                                        <a href="modify?idVideo={{ video.id }}">Modifier</a><br>
+                                                        <a href="delete?idVideo={{ video.id }}">Supprimer</a>
+                                                    </div>
+                                                {% endif %}
 
                                             </div>
                                         </div>
