@@ -79,6 +79,7 @@ final class uploadVidController extends AbstractController{
                             $vid->title = $titre;
                             $vid->description = $desc;
                             $vid->userId = $userId;
+                            $vid->state = $_POST['statut'];
 
                             if(!empty($_FILES['miniature']['name'])){
                                 $minExt = pathinfo($_FILES['miniature']['name'], PATHINFO_EXTENSION);
