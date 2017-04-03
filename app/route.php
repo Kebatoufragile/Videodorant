@@ -49,3 +49,5 @@ $app->post('/delVideo', 'App\Controllers\gestionVidController:supprimerVideo')->
 $app->post('/changeStateVideo', 'App\Controllers\gestionVidController:changeStateVid')->setName('changeStateVideo');
 
 $app->get('/video', 'App\Controllers\VideoController:showVideo')->setName('video');
+
+$app->get('/search', 'App\Controllers\SearchController:search')->setName('search');
