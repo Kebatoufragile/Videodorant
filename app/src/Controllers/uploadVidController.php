@@ -60,6 +60,10 @@ final class uploadVidController extends AbstractController{
                     //if($sizeVid >= MAX_SIZE){
                     //On vérifie les dimensions et taille de l'image
                     //Parcours du tableau d'erreur
+
+                    if(!file_exists(TARGET))
+                        mkdir(TARGET, 0777, true);
+
                     if(isset($_FILES['video']['error']) && UPLOAD_ERR_OK === $_FILES['video']['error']){
                         //On renomme le fichier
                         $nomVideo = md5(uniqid()).'.'.$extension;
@@ -79,8 +83,13 @@ final class uploadVidController extends AbstractController{
                             $vid->title = $titre;
                             $vid->description = $desc;
                             $vid->userId = $userId;
+                            $vid->state = $_POST['statut'];
 
                             if(!empty($_FILES['miniature']['name'])){
+
+                                if(!file_exists(MIN_TARGET))
+                                    mkdir(MIN_TARGET, 0777, true);
+
                                 $minExt = pathinfo($_FILES['miniature']['name'], PATHINFO_EXTENSION);
 
                                 if(in_array(strtolower($minExt), $tabExtMin)){
@@ -107,7 +116,7 @@ final class uploadVidController extends AbstractController{
                         }else{
                             //Sinon on affiche une erreur système
                             return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                                "error" => "Problème d\'upload"
+                                "error" => "Problème d'upload"
                             ));
                             //$message = 'Problème d\'upload.';
                         }
@@ -127,7 +136,7 @@ final class uploadVidController extends AbstractController{
                 }else{
                     //Sinon on affiche une erreur sur l'extension
                     return $this->view['view']->render($response, "videoUpload.html.twig", array(
-                        "error" => "L\'extension du fichier n\'est pas correct"
+                        "error" => "L'extension du fichier n'est pas correct"
                     ));
                     //$message = 'L\'extension du fichier n\'est pas correct.';
                 }
@@ -140,7 +149,7 @@ final class uploadVidController extends AbstractController{
             }
         }else{
             return $this->view['view']->render($response, 'videoUpload.html.twig', array(
-                "error" => "Aucun fichier n\'a été envoyé"
+                "error" => "Aucun fichier n'a été envoyé"
             ));
             //$message = "Aucun fichier n'\a été envoyé";
         }
