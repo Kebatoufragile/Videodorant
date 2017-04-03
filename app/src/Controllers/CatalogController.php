@@ -45,8 +45,10 @@ final class CatalogController extends AbstractController{
         if(count($abonnements) > 0){
             foreach($abonnements as $k=>$v){
                 $video = Video::where('userId', 'like', $v->idUser)->orderBy('dateAjout', 'desc')->first();
-                $video->user = User::where('id', 'like', $video->userId)->first()->username;
-                array_push($videos, $video);
+                if(!is_null($video)){
+                    $video->user = User::where('id', 'like', $video->userId)->first()->username;
+                    array_push($videos, $video);
+                }
             }
         }else
             return $this->getVideosWhenNotLogged();
