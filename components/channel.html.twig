@@ -32,10 +32,12 @@
             {% else %}
 
                 {# pour s'abonner à une chaîne #}
-                <form action="subscribe" method="post">
-                    <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
-                    <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>S'abonner à la chaîne</button>
-                </form>
+                {% if user.id != channel.id %}
+                    <form action="subscribe" method="post">
+                        <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
+                        <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>S'abonner à la chaîne</button>
+                    </form>
+                {% endif %}
 
             {% endif %}
 
