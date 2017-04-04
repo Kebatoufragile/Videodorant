@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 28 Mars 2017 à 19:02
+-- Généré le :  Lun 03 Avril 2017 à 16:40
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `abonnements` (
-  `idAbonnement` int(11) NOT NULL,
+  `idAbonnement` int(10) UNSIGNED NOT NULL,
   `idAbonne` int(11) NOT NULL,
   `idUser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -48,6 +48,13 @@ CREATE TABLE `activations` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `activations`
+--
+
+INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'UwqxicRg53X8ydu9g39HxtfuWNCvdAve', 1, '2017-04-03 14:39:37', '2017-04-03 14:39:37', '2017-04-03 14:39:37');
+
 -- --------------------------------------------------------
 
 --
@@ -55,18 +62,9 @@ CREATE TABLE `activations` (
 --
 
 CREATE TABLE `categorie` (
-  `idCategorie` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `categorie`
---
-
-INSERT INTO `categorie` (`idCategorie`, `name`) VALUES
-(1, 'Jeux vidéos'),
-(2, 'Promenade'),
-(3, 'Délire');
+  `idCategorie` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -75,23 +73,10 @@ INSERT INTO `categorie` (`idCategorie`, `name`) VALUES
 --
 
 CREATE TABLE `categorie_stream` (
-  `idCategorieStream` int(11) NOT NULL,
+  `idCategorieStream` int(10) UNSIGNED NOT NULL,
   `idStream` int(11) NOT NULL,
   `idCategorie` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `commentaires`
---
-
-CREATE TABLE `commentaires` (
-  `idCommentaire` int(11) NOT NULL,
-  `idUser` int(11) NOT NULL,
-  `idVideo` int(11) NOT NULL,
-  `contenu` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -158,10 +143,10 @@ CREATE TABLE `role_users` (
 --
 
 CREATE TABLE `stream` (
-  `idStream` int(11) NOT NULL,
+  `idStream` int(10) UNSIGNED NOT NULL,
   `idUser` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -170,10 +155,10 @@ CREATE TABLE `stream` (
 --
 
 CREATE TABLE `tags` (
-  `idTag` int(11) NOT NULL,
+  `idTag` int(10) UNSIGNED NOT NULL,
   `idStream` int(11) NOT NULL,
-  `tag` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tag` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -199,28 +184,40 @@ CREATE TABLE `throttle` (
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `permissions` text COLLATE utf8_unicode_ci NOT NULL,
+  `permissions` text COLLATE utf8_unicode_ci,
   `last_login` timestamp NULL DEFAULT NULL,
   `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `profilPicLink` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `profilPicLink` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `permissions`, `last_login`, `first_name`, `last_name`, `created_at`, `updated_at`, `username`, `profilPicLink`) VALUES
+(1, 'admin@admin.com', '$2y$10$dXPY5b4u3FPvaLf4l0HjAu3VnPUTfZJF3Ue0kXO/5Z3.cA5hAnyRi', NULL, NULL, 'Yudi', 'Purwanto', '2017-04-03 14:39:37', '2017-04-03 14:39:37', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `videos`
+-- Structure de la table `video`
 --
 
-CREATE TABLE `videos` (
-  `idVideo` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `idUser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `video` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `link` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `userId` int(11) NOT NULL,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateAjout` date NOT NULL,
+  `minLink` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Index pour les tables exportées
@@ -250,12 +247,6 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `categorie_stream`
   ADD PRIMARY KEY (`idCategorieStream`);
-
---
--- Index pour la table `commentaires`
---
-ALTER TABLE `commentaires`
-  ADD PRIMARY KEY (`idCommentaire`);
 
 --
 -- Index pour la table `persistences`
@@ -312,10 +303,10 @@ ALTER TABLE `users`
   ADD KEY `users_last_name_index` (`last_name`);
 
 --
--- Index pour la table `videos`
+-- Index pour la table `video`
 --
-ALTER TABLE `videos`
-  ADD PRIMARY KEY (`idVideo`);
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -325,32 +316,27 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT pour la table `abonnements`
 --
 ALTER TABLE `abonnements`
-  MODIFY `idAbonnement` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAbonnement` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `activations`
 --
 ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCategorie` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `categorie_stream`
 --
 ALTER TABLE `categorie_stream`
-  MODIFY `idCategorieStream` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `commentaires`
---
-ALTER TABLE `commentaires`
-  MODIFY `idCommentaire` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategorieStream` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `reminders`
 --
@@ -365,27 +351,27 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `stream`
 --
 ALTER TABLE `stream`
-  MODIFY `idStream` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idStream` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `idTag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idTag` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT pour la table `videos`
+-- AUTO_INCREMENT pour la table `video`
 --
-ALTER TABLE `videos`
-  MODIFY `idVideo` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `video`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -84,10 +84,16 @@ class StreamController extends AbstractController{
             $stream = Stream::where('idStream', 'like', $idStream)->first();
 
             try{
-              exec("nohup cvlc v4l2:///dev/video0 --sout \'#transcode{vcodec=mp4v, acodec=mp4a, mux=mp4, vb=1024}:rtp{sdp=rtsp://127.0.0.1:8554/$idStream}\' 1>/dev/null 2>/dev/null &", $output);
-              var_dump($output);
+              //system("nohup cvlc -vvv v4l2:///dev/video0 --sout \'\#transcode{vcodec=mp4v, vb=1024, acodec=mp4a}:rtp{sdp=rtsp://127.0.0.1:8554/$idStream}\' 1>/dev/null 2>/dev/null &", $output);
+              //$script = file_get_contents("/var/www/html/Videodorant/app/src/Controllers/runStream.sh");
+              if(exec("nohup ./var/www/html/Videodorant/app/src/Controllers/runStream.sh $idStream 1>log.success.txt 2>log.error.txt &", $output)){
+                var_dump($output);
+                echo("OK");
+              }else{
+                echo('NOP');
+              }
             }catch(Exception $e){
-              var_dump($e);
+                var_dump($e);
             }
             // stream existe
             if(!is_null($stream)){
@@ -100,7 +106,7 @@ class StreamController extends AbstractController{
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'stream' => $stream
-                      ));
+                    ));
                 }
 
             }else{ //stream existe pas

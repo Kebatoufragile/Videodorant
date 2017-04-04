@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
-use Cartalyst\Sentinel\Users\UserInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -29,7 +27,7 @@ final class LogoutController extends AbstractController{
             session_destroy();
 
             $this->view['view']->render($response, 'homepage.html.twig', array(
-                'success' => "You have successfully been logged out."
+                'success' => "Vous avez bien été déconnecté."
             ));
         }else
             $this->view['view']->render($response, 'homepage.html.twig', array());

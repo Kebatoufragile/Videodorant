@@ -41,3 +41,13 @@ $app->get('/channel', 'App\Controllers\ChannelController:showChannel')->setName(
 $app->post('/subscribe', 'App\Controllers\ChannelController:subscribe')->setName('subscribe');
 
 $app->post('/unsubscribe', 'App\Controllers\ChannelController:unsubscribe')->setName('unsubscribe');
+
+$app->get('/gestionVideos', 'App\Controllers\gestionVidController:dispatch')->setName('gestionVideos');
+
+$app->post('/delVideo', 'App\Controllers\gestionVidController:supprimerVideo')->setName('delVideo');
+
+$app->post('/changeStateVideo', 'App\Controllers\gestionVidController:changeStateVid')->setName('changeStateVideo');
+
+$app->get('/video', 'App\Controllers\VideoController:showVideo')->setName('video');
+
+$app->get('/search', 'App\Controllers\SearchController:search')->setName('search');

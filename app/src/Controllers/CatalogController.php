@@ -3,8 +3,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Abonnements;
 use App\Models\User;
-use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use App\Models\Video;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -37,19 +38,36 @@ final class CatalogController extends AbstractController{
     }
 
     private function getVideosWhenLogged(){
-        //$suscriptions = User::getSuscriptions($_SESSION['user']->id);
+        $abonnements = Abonnements::where('idAbonne', 'like', $_SESSION['user']->id)->get();
 
         $videos = array();
 
-        /**foreach($suscriptions as $k=>$v)
-            array_push($videos, User::getRecentVideos($suscriptions->idUser));*/
+        if(count($abonnements) > 0){
+            foreach($abonnements as $k=>$v){
+                $video = Video::where('userId', 'like', $v->idUser)->orderBy('dateAjout', 'desc')->first();
+
+                if(!is_null($video)){
+                    $video->user = User::where('id', 'like', $video->userId)->first()->username;
+                    if($video->state != "privee")
+                      array_push($videos, $video);
+                }
+            }
+        }else
+            return $this->getVideosWhenNotLogged();
+
 
         return $videos;
     }
 
     private function getVideosWhenNotLogged(){
-        //return Video::getPopularVideos();
-        $videos = [1,2,3,4,5,6,7,8,9,10];
+
+        $videos = Video::orderBy('dateAjout', 'desc')->take(30)->get();
+
+        foreach($videos as $k=>$v){
+            $u = User::where('id', 'like', $v->userId)->first();
+            $v->user = $u->username;
+        }
+
         return $videos;
     }
 
