@@ -93,7 +93,7 @@ class StreamController extends AbstractController{
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'stream' => $stream
-                      ));
+                    ));
                 }
 
             }else{ //stream existe pas
