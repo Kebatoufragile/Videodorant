@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Avril 2017 à 16:40
+-- Généré le :  Sam 10 Juin 2017 à 16:54
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  7.0.9
 
@@ -53,7 +53,11 @@ CREATE TABLE `activations` (
 --
 
 INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'UwqxicRg53X8ydu9g39HxtfuWNCvdAve', 1, '2017-04-03 14:39:37', '2017-04-03 14:39:37', '2017-04-03 14:39:37');
+(1, 1, 'UwqxicRg53X8ydu9g39HxtfuWNCvdAve', 1, '2017-04-03 14:39:37', '2017-04-03 14:39:37', '2017-04-03 14:39:37'),
+(2, 2, 'wS7hRUXZug2Qh82UKFfJFNMjLToOsI3d', 1, '2017-04-03 15:04:42', '2017-04-03 15:04:42', '2017-04-03 15:04:42'),
+(3, 3, 'whh1RwmtJYJ2EA6VH0lL8lVhi2Mu7v8t', 1, '2017-06-10 14:38:20', '2017-06-10 14:38:20', '2017-06-10 14:38:20'),
+(4, 4, 'eAcdmROb1rmDjtV5eRsnhEV3sJNJCyzx', 1, '2017-06-10 14:50:41', '2017-06-10 14:50:41', '2017-06-10 14:50:41'),
+(5, 5, 'nuybKe96FIcNxQaGrCeKCXFu8xzzBGSr', 1, '2017-06-10 14:53:48', '2017-06-10 14:53:48', '2017-06-10 14:53:48');
 
 -- --------------------------------------------------------
 
@@ -91,6 +95,20 @@ CREATE TABLE `persistences` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `persistences`
+--
+
+INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Ce0XcNCMGehdifHBjqWozfWbCqEnjgWS', '2017-04-03 15:04:54', '2017-04-03 15:04:54'),
+(2, 2, 'MXFmcuJMHNeNKcMY6tZECdXHlA4qvT8u', '2017-04-03 15:04:54', '2017-04-03 15:04:54'),
+(3, 2, 'wc1O8M33bssmI2DMABoc6pR2lCzgJMnz', '2017-06-10 12:06:56', '2017-06-10 12:06:56'),
+(5, 2, '4OOwL8RWOK3n0BXuEPVCbqNYdRFxKxo0', '2017-06-10 13:41:35', '2017-06-10 13:41:35'),
+(7, 2, 'EvefkQ6oanc9DCD305I4kWNs32x5YB6j', '2017-06-10 14:33:25', '2017-06-10 14:33:25'),
+(9, 2, 'tjLyLzXdae2Hu01bIALVCTs9Cypay0g0', '2017-06-10 14:34:06', '2017-06-10 14:34:06'),
+(11, 2, 'L1cnNLuQLkXeunUsjRjNnYUgS4v6nuM9', '2017-06-10 14:35:54', '2017-06-10 14:35:54'),
+(13, 3, 'Am1mnqKgAL9fMZ1CI4HE1r7qwxQaCOEv', '2017-06-10 14:38:29', '2017-06-10 14:38:29');
 
 -- --------------------------------------------------------
 
@@ -148,6 +166,13 @@ CREATE TABLE `stream` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Contenu de la table `stream`
+--
+
+INSERT INTO `stream` (`idStream`, `idUser`, `name`) VALUES
+(1, 3, 'erhrth');
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +184,13 @@ CREATE TABLE `tags` (
   `idStream` int(11) NOT NULL,
   `tag` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `tags`
+--
+
+INSERT INTO `tags` (`idTag`, `idStream`, `tag`) VALUES
+(1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -174,6 +206,17 @@ CREATE TABLE `throttle` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `throttle`
+--
+
+INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'global', NULL, '2017-06-10 14:24:07', '2017-06-10 14:24:07'),
+(2, NULL, 'ip', '::1', '2017-06-10 14:24:07', '2017-06-10 14:24:07'),
+(3, 1, 'user', NULL, '2017-06-10 14:24:07', '2017-06-10 14:24:07'),
+(4, NULL, 'global', NULL, '2017-06-10 14:24:22', '2017-06-10 14:24:22'),
+(5, NULL, 'ip', '::1', '2017-06-10 14:24:22', '2017-06-10 14:24:22');
 
 -- --------------------------------------------------------
 
@@ -200,7 +243,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `permissions`, `last_login`, `first_name`, `last_name`, `created_at`, `updated_at`, `username`, `profilPicLink`) VALUES
-(1, 'admin@admin.com', '$2y$10$dXPY5b4u3FPvaLf4l0HjAu3VnPUTfZJF3Ue0kXO/5Z3.cA5hAnyRi', NULL, NULL, 'Yudi', 'Purwanto', '2017-04-03 14:39:37', '2017-04-03 14:39:37', '', '');
+(2, 'seb@seb.seb', '$2y$10$3v7O9daetVe8spWneQuMF.BqTGJF6gVWPTD.TQtYinOXbKY1dYOvi', NULL, '2017-06-10 14:35:54', 'Sébastien', 'Dupuis', '2017-04-03 15:04:42', '2017-06-10 14:35:54', '', ''),
+(3, 'pipi@caca.popo', '$2y$10$oBsbTQTHz68IYoRjdnUCBOt5lfnMYvn5oJST6kLBisayP2o.xv0Iy', NULL, '2017-06-10 14:38:29', 'Pipi', 'Caca', '2017-06-10 14:38:20', '2017-06-10 14:38:29', '', ''),
+(4, 'fze@zfez.fr', '$2y$10$8ZZOD2DLwP/NQwcE3lnTf.D0g6xG8JoerbLic6LWE0fX2vmTlXbFm', NULL, NULL, 'fze', 'ezf', '2017-06-10 14:50:41', '2017-06-10 14:50:41', '', ''),
+(5, 'zef@fze.gr', '$2y$10$5dT0KZXEdH0YK28sLDJHquZGUcy8UZH4dGod5NDC5t6sAwkeKB7Wm', NULL, NULL, 'fez', 'ezfez', '2017-06-10 14:53:48', '2017-06-10 14:53:48', '', '');
 
 -- --------------------------------------------------------
 
@@ -321,7 +367,7 @@ ALTER TABLE `abonnements`
 -- AUTO_INCREMENT pour la table `activations`
 --
 ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
@@ -336,7 +382,7 @@ ALTER TABLE `categorie_stream`
 -- AUTO_INCREMENT pour la table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `reminders`
 --
@@ -351,22 +397,22 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `stream`
 --
 ALTER TABLE `stream`
-  MODIFY `idStream` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idStream` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `idTag` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idTag` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `video`
 --
