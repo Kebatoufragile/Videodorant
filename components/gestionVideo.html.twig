@@ -32,21 +32,21 @@
                       <span class="card-title activator">{{ video.title }}</span>
                       <p><a href="video?idVideo={{ video.id }}">Voir la vidéo</a></p>
 
-                      <form action="delVideo" method="post">
+                      <form action="delVideo" method="post" autocomplete="off">
                           <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
                           <button class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Supprimer la vidéo</button>
                       </form>
 
                       {% if video.state == "publique" %}
 
-                          <form action="changeStateVideo" method="post">
+                          <form action="changeStateVideo" method="post" autocomplete="off">
                               <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
                               <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>Passer la vidéo en privée</button>
                           </form>
 
                       {% else %}
 
-                          <form action="changeStateVideo" method="post">
+                          <form action="changeStateVideo" method="post" autocomplete="off">
                               <input style="display:none" name="idVideo" type="radio" value={{ video.id }} checked />
                               <button class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Passer la vidéo en publique</button>
                           </form>
