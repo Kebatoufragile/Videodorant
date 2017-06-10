@@ -24,7 +24,7 @@
             {% if abo != false %}
 
                 {# pour se désabonner à une chaîne #}
-                <form action="unsubscribe" method="post">
+                <form action="unsubscribe" method="post" autocomplete="off">
                     <input style="display:none" name="idUser" type="radio" value={{ channel.id }} checked />
                     <button class="waves-effect waves-light btn"><i class="material-icons left">input</i>Se désabonner à la chaîne</button>
                 </form>
