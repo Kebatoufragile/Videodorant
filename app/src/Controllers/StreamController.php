@@ -83,6 +83,13 @@ class StreamController extends AbstractController{
 
             $stream = Stream::where('idStream', 'like', $idStream)->first();
 
+
+            try {
+              system("../jsmpeg/bash start_server.bash $idStream");
+            } catch(Exception $e) {
+              echo($e);
+            }
+
             if(!is_null($stream)){
                 if(isset($_SESSION['user'])){
                     return $this->view['view']->render($response, 'stream.html.twig', array(

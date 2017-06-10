@@ -7,17 +7,6 @@
             $('#commentsright').height($('#streamleft').height());
         });
 
-
-        $(window).on('load', function(){
-          var video = document.getElementById('video');
-
-          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({video: true}).then(function(stream){
-              video.src = window.URL.createObjectURL(stream);
-              video.play();
-            });
-          }
-        });
     </script>
 
     <div class="row">
@@ -28,7 +17,14 @@
 
             <div class="card-content">
 
-            <video id="video" width="640" height="480" autoplay></video>
+            <video id="localVideo" autoplay></video>
+            <video id="remoteVideo" autoplay></video>
+
+            <div>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="startButton">Start</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="callButton">Call</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="hangupButton">Hang Up</button>
+            </div>
 
             </div>
 
@@ -37,11 +33,21 @@
         <div class="col s4 card blue-grey z-depth-5">
 
             <div id="commentsright">
-                {# TODO #}
+                <textarea id="dataChannelReceive" disabled></textarea>
+                <textarea id="dataChannelSend" disabled placeholder="Appuyez sur commencer, tapez du texte puis envoyez"></textarea>
+            </div>
+
+            <div id="buttons">
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentStartButton">Start</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentSendButton">Send</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentCloseButton">Close</button>
             </div>
 
         </div>
 
     </div>
+
+    <script src="js/lib/adapter.js"></script>
+    <script src="js/main.js"></script>
 
 {% endblock %}
