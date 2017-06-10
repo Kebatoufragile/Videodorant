@@ -25,7 +25,7 @@
 
             <div class="center-align"><h3>{{user.username}}</h3></div>
 
-            <form action="account" method="post" class="col s12">
+            <form action="account" method="post" class="col s12" autocomplete="off">
 
                 <div class="input-field">
                     <input name="prenom" type="text" id="prenom" value="{{ user.first_name }}" autofocus autocomplete="off" required/>
@@ -53,7 +53,7 @@
             <div class="divider col s12" style="margin-bottom:20px"></div>
 
 
-            <form action="modifypassword" method="post" class="col s12">
+            <form action="modifypassword" method="post" class="col s12" autocomplete="off">
 
                 <div class="input-field">
                     <input name="actualPassword" type="password" id="actualPassword" autocomplete="off" required/>
