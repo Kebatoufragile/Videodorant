@@ -63,7 +63,7 @@ function start() {
   trace('Requesting local stream');
   startButton.disabled = true;
   navigator.mediaDevices.getUserMedia({
-    audio: true,
+    audio: false,
     video: true
   })
   .then(gotStream)
@@ -85,7 +85,7 @@ function call() {
   if (audioTracks.length > 0) {
     trace('Using audio device: ' + audioTracks[0].label);
   }
-  var servers = "127.0.0.1:8080";
+  var servers = null;
   // Add pc1 to global scope so it's accessible from the browser console
   window.pc1 = pc1 = new RTCPeerConnection(servers);
   trace('Created local peer connection object pc1');
