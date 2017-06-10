@@ -1,5 +1,5 @@
 body{
-    background: url("../img/background.jpg") fixed no-repeat center center;
+    background: url("../img/WALLPAPER-1.jpg") fixed no-repeat center center;
 }
 
 .homeform{
@@ -8,6 +8,17 @@ body{
 
 #videos{
     margin-top:5%
+}
+
+#search{
+	background: transparent;
+	color: white;
+}
+
+.card{
+	background: url("../img/WALLPAPER-1.jpg") fixed no-repeat center center;
+	/*border: 5px fixed white;*/
+	color: white;
 }
 
 .video{
