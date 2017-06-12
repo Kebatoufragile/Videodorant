@@ -83,19 +83,13 @@ class StreamController extends AbstractController{
 
             $stream = Stream::where('idStream', 'like', $idStream)->first();
 
-            try{
-              //system("nohup cvlc -vvv v4l2:///dev/video0 --sout \'\#transcode{vcodec=mp4v, vb=1024, acodec=mp4a}:rtp{sdp=rtsp://127.0.0.1:8554/$idStream}\' 1>/dev/null 2>/dev/null &", $output);
-              //$script = file_get_contents("/var/www/html/Videodorant/app/src/Controllers/runStream.sh");
-              if(exec("nohup ./var/www/html/Videodorant/app/src/Controllers/runStream.sh $idStream 1>log.success.txt 2>log.error.txt &", $output)){
-                var_dump($output);
-                echo("OK");
-              }else{
-                echo('NOP');
-              }
-            }catch(Exception $e){
-                var_dump($e);
+
+            try {
+              system("../jsmpeg/bash start_server.bash $idStream");
+            } catch(Exception $e) {
+              echo($e);
             }
-            // stream existe
+
             if(!is_null($stream)){
                 if(isset($_SESSION['user'])){
                     return $this->view['view']->render($response, 'stream.html.twig', array(
