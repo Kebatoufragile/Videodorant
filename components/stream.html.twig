@@ -23,11 +23,16 @@
                   <input id="sessionInput"/>
                   <button type="submit">Create it!</button>
               </form>
-              <div class="videoContainer">
-                  <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
-                  <div id="localVolume" class="volume_bar"></div>
-              </div>
-              <div id="remotes"></div>
+
+              {% if streamer is defined %}
+                <div class="videoContainer">
+                    <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
+                    <div id="localVolume" class="volume_bar"></div>
+                </div>
+              {% else %}
+                <div id="remotes"></div>
+              {% endif %}
+
 
             </div>
 

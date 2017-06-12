@@ -92,11 +92,20 @@ class StreamController extends AbstractController{
 
             if(!is_null($stream)){
                 if(isset($_SESSION['user'])){
+                  if($stream->idUser === $_SESSION['user']->id){ //check si l'utilisateur est le streamer
+                      return $this->view['view']->render($response, 'stream.html.twig', array(
+                          'user' => $_SESSION['user'],
+                          'stream' => $stream,
+                          'idStream' => $idStream,
+                          'streamer' => true
+                      ));
+                  } else {
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'user' => $_SESSION['user'],
                         'stream' => $stream,
-                        'idStream' => $idStream
+                        'idStream' => $idStream,
                     ));
+                  }
                 }else{
                     return $this->view['view']->render($response, 'stream.html.twig', array(
                         'stream' => $stream
