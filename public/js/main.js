@@ -1,5 +1,4 @@
 
-console.log("test");
 // grab the room from the URL
 var room = location.search && location.search.split('?')[1];
 // create our webrtc connection
@@ -68,7 +67,6 @@ webrtc.on('volumeChange', function (volume, treshold) {
 // Since we use this twice we put it here
 function setRoom(name) {
   $('form').remove();
-  $('h1').text(name);
   $('#subTitle').text('Link to join: ' + location.href);
   $('body').addClass('active');
 }
