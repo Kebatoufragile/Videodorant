@@ -6,6 +6,7 @@
         $('document').ready(function(){
             $('#commentsright').height($('#streamleft').height());
         });
+
     </script>
 
     <div class="row">
@@ -17,23 +18,16 @@
             <div class="card-content">
 
 
-                {#<video controls width="80%" >
-                    <source src=":8554/{{idStream}}" type="video/mp4"/>
-                  </video>#}
-
-
-
-
-                <OBJECT classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921"
-                        codebase="http://downloads.videolan.org/pub/videolan/vlc/latest/win32/axvlc.cab"
-                        width="640" height="480" id="vlc" events="True">
-                    <param name="src" value="rtsp://localhost:8554/{{idStream}}" />
-                    <param name="ShowDisplay" value="True" />
-                    <param name="AutoLoop" value="False" />
-                    <param name="AutoPlay" value="True" />
-                    <embed id="vlcEmb"  type="video/x-m4v" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="640" height="480"
-                           target="rtsp://localhost:8554/{{idStream}}" ></embed>
-                </OBJECT>
+              {% if streamer is defined %}
+                <button class="btn waves-effect waves-light blue-grey darken-4 id="screenShareButton">Lancer le stream</button>
+                <hr/>
+                <div class="videoContainer">
+                    <video id="localVideo" style="height: 600px; width: 100%" oncontextmenu="return false;"></video>
+                    <div id="localVolume" class="volume_bar"></div>
+                </div>
+              {% else %}
+                <div id="remotes"></div>
+              {% endif %}
 
             </div>
 
@@ -42,11 +36,21 @@
         <div class="col s4 card blue-grey z-depth-5">
 
             <div id="commentsright">
-                {# TODO #}
+                <textarea id="dataChannelReceive" disabled></textarea>
+                <textarea id="dataChannelSend" disabled placeholder="Appuyez sur commencer, tapez du texte puis envoyez"></textarea>
+            </div>
+
+            <div id="buttons">
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentStartButton">Start</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentSendButton">Send</button>
+              <button class="btn waves-effect waves-light blue-grey darken-4" id="commentCloseButton">Close</button>
             </div>
 
         </div>
 
     </div>
+
+    <script src="js/lib/adapter.js"></script>
+    <script src="js/main.js"></script>
 
 {% endblock %}
