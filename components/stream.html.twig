@@ -5,7 +5,8 @@
     <script>
         $('document').ready(function(){
             $('#commentsright').height($('#streamleft').height());
-            if($('#remotes')){
+            if(document.getElementById('spectateur')){
+              console.log("wtf");
               $('#user-type').text("Spectateur");
             } else {
               $('#user-type').text("Streameur");
@@ -29,10 +30,11 @@
                 <button class="btn waves-effect waves-light blue-grey darken-4 id="screenShareButton">Lancer le stream</button>
                 <hr/>
                 <div class="videoContainer">
-                    <video id="localVideo" style="height: 500px; width: 100%" oncontextmenu="return false;"></video>
+                    <video id="localVideo" style="height: 500px; width: 100%" oncontextmenu="return false; max-width:100%;"></video>
                     <div id="localVolume" class="volume_bar"></div>
                 </div>
               {% else %}
+                <div id="spectateur"></div>
                 <div id="remotes"></div>
               {% endif %}
 
