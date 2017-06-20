@@ -5,6 +5,12 @@
     <script>
         $('document').ready(function(){
             $('#commentsright').height($('#streamleft').height());
+            if(document.getElementById('spectateur')){
+              console.log("wtf");
+              $('#user-type').text("Spectateur");
+            } else {
+              $('#user-type').text("Streameur");
+            };
         });
 
     </script>
@@ -15,6 +21,8 @@
 
             <h1 class="card-title white-text">{{ stream.name }}</h1>
 
+            <div id="user-type" class="white-text"></div>
+
             <div class="card-content">
 
 
@@ -22,10 +30,11 @@
                 <button class="btn waves-effect waves-light blue-grey darken-4 id="screenShareButton">Lancer le stream</button>
                 <hr/>
                 <div class="videoContainer">
-                    <video id="localVideo" style="height: 600px; width: 100%" oncontextmenu="return false;"></video>
+                    <video id="localVideo" style="height: 500px; width: 100%" oncontextmenu="return false; min-height:100%;"></video>
                     <div id="localVolume" class="volume_bar"></div>
                 </div>
               {% else %}
+                <div id="spectateur"></div>
                 <div id="remotes"></div>
               {% endif %}
 
@@ -35,16 +44,16 @@
 
         <div class="col s4 card blue-grey z-depth-5">
 
-            <div id="commentsright">
+          {#<div id="commentsright">
                 <textarea id="dataChannelReceive" disabled></textarea>
                 <textarea id="dataChannelSend" disabled placeholder="Appuyez sur commencer, tapez du texte puis envoyez"></textarea>
-            </div>
+            </div>#}
 
-            <div id="buttons">
+            {#<div id="buttons">
               <button class="btn waves-effect waves-light blue-grey darken-4" id="commentStartButton">Start</button>
               <button class="btn waves-effect waves-light blue-grey darken-4" id="commentSendButton">Send</button>
               <button class="btn waves-effect waves-light blue-grey darken-4" id="commentCloseButton">Close</button>
-            </div>
+            </div>#}
 
         </div>
 
